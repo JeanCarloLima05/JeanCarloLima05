@@ -7,7 +7,7 @@
 
 - 💬 Me pergunte sobre **Power BI, Python, SQL, Analise de Dados**
 
-- 📫 How to reach me **jeancarlolimaalmeida@gmail.com**
+- 📫 Como me achar **jeancarlolimaalmeida@gmail.com**
 
 - 📄 Minhas Experiências estão detalhadas no meu Linkedin [www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186](www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186)
 
