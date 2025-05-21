@@ -1,27 +1,47 @@
-<h1 align="center">Oi 👋, Eu Sou Jean Carlo</h1>
-<h3 align="center">Apaixonado por análise de dados</h3>
+## 👋 Bem-vindo ao meu repositório de estudos!
 
-- 🔭Atualmente estou em uma Mudança de Carreira Para Área de Dados - **Análise de Dados**
+# ![Análise de Dados Profissional](https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=400&fit=crop&crop=entropy&auto=format)
 
-- 🌱 Atualmente estou aprendendo **Power BI, Python, Machine Learning, SQL, R, Business Intelligence**
+Olá! Sou **Jean Carlo**, em transição de carreira para a área de dados, construindo conhecimento através do estudo e aplicação prática de ferramentas de análise.
 
-- 💬 Me pergunte sobre **Power BI, Python, SQL, Analise de Dados**
+✨ **Propósito deste repositório:**  
+- Documentar minha evolução na área de análise de dados  
+- Compartilhar exercícios e estudos de caso práticos  
+- Aplicar ferramentas do ecossistema de dados em desafios reais  
 
-- 📫 Como me achar **jeancarlolimaalmeida@gmail.com**
+🔍 **Importante:** Todos os estudos utilizam exclusivamente bases de dados públicas ou datasets abertos para fins educacionais.
 
-- 📄 Minhas Experiências estão detalhadas no meu Linkedin [www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186](www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186)
+## 🎯 Minha Jornada
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://linkedin.com/in/www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186" height="30" width="40" /></a>
-</p>
+**Analista de Dados em Formação | Foco em Aprendizado Prático**
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="mssql" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://www.oracle.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg" alt="oracle" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://www.sqlite.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" alt="sqlite" width="40" height="40"/> </a> </p>
+- 📚 **Atualmente estudando:** Power BI, Python para análise de dados e SQL
+- 🛠️ **Abordagem:** "Learning by doing" - aprender resolvendo problemas reais
+- 🧠 **Mentalidade:** Desenvolver pensamento analítico através da prática
 
-<p><img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=jeancarlolima05&show_icons=true&locale=en&layout=compact" alt="jeancarlolima05" /></p>
+## 💻 Habilidades em Desenvolvimento
 
+| Área          | Ferramentas/Competências                          | Status        |
+|---------------|--------------------------------------------------|--------------|
+| **Visualização**  | Power BI, Excel                                 | 🚀 Praticando |
+| **Programação**   | Python (Pandas, NumPy), SQL                      | 📈 Estudando  |
+| **Análise**       | Limpeza de dados, Estatística Descritiva         | 🧠 Aprendendo |
 
+## 📌 Princípios dos Meus Estudos
+
+✅ **Transparência:** Todos os datasets possuem fonte declarada  
+✅ **Documentação:** Processos e aprendizados registrados  
+✅ **Ética:** Uso exclusivo de dados públicos e abertos  
+✅ **Progresso:** Evolução contínua através de desafios práticos  
+
+## 📫 Vamos Conectar?
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186)
+[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jeancarlolimaalmeida@gmail.com)
+
+🔗 *"Estou aberto a trocas de conhecimento, dicas de estudo e oportunidades de aprendizado!"*
+
+📌 *Nota: Este repositório documenta minha jornada de aprendizado em análise de dados.*
 
 <!--
 **JeanCarloLima05/JeanCarloLima05** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
