@@ -36,8 +36,8 @@ Olá! Sou **Jean Carlo**, em transição de carreira para a área de dados, cons
 
 ## 📫 Vamos Conectar?
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186)
-[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jeancarlolimaalmeida@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/Conecte--se_no_LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jean-carlo-lima-de-almeida-8a9054186)
+[![Email](https://img.shields.io/badge/-jeancarlolimaalmeida@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jeancarlolimaalmeida@gmail.com)
 
 🔗 *"Estou aberto a trocas de conhecimento, dicas de estudo e oportunidades de aprendizado!"*
 
