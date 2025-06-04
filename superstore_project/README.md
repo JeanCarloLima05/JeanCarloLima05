@@ -83,30 +83,59 @@ As transformações foram realizadas utilizando o **Power Query**, com a **Lingu
 
 Para facilitar a interpretação e o desenvolvimento da análise, todos os nomes das colunas foram traduzidos do inglês para o português, utilizando o seguinte código M:  
 
-```m
-// Tradução dos cabeçalhos, para melhor entendimento
-#"Cabeçalhos Traduzidos" = Table.RenameColumns(#"Cabeçalhos Promovidos", {
-    {"Row ID", "ID da Linha"},
-    {"Order ID", "ID do Pedido"},
-    {"Order Date", "Data do Pedido"},
-    {"Ship Date", "Data de Envio"},
-    {"Ship Mode", "Modo de Envio"},
-    {"Customer ID", "ID do Cliente"},
-    {"Customer Name", "Nome do Cliente"},
-    {"Segment", "Segmento"},
-    {"Country", "País"},
-    {"City", "Cidade"},
-    {"State", "Estado"},
-    {"Postal Code", "CEP"},
-    {"Region", "Região"},
-    {"Product ID", "ID do Produto"},
-    {"Category", "Categoria"},
-    {"Sub-Category", "Subcategoria"},
-    {"Product Name", "Nome do Produto"},
-    {"Sales", "Vendas"},
-    {"Quantity", "Quantidade"},
-    {"Discount", "Desconto"},
-    {"Profit", "Lucro"}
-}),
+    ```m
+    // Tradução dos cabeçalhos, para melhor entendimento
+    #"Cabeçalhos Traduzidos" = Table.RenameColumns(#"Cabeçalhos Promovidos", {
+        {"Row ID", "ID da Linha"},
+        {"Order ID", "ID do Pedido"},
+        {"Order Date", "Data do Pedido"},
+        {"Ship Date", "Data de Envio"},
+        {"Ship Mode", "Modo de Envio"},
+        {"Customer ID", "ID do Cliente"},
+        {"Customer Name", "Nome do Cliente"},
+        {"Segment", "Segmento"},
+        {"Country", "País"},
+        {"City", "Cidade"},
+        {"State", "Estado"},
+        {"Postal Code", "CEP"},
+        {"Region", "Região"},
+        {"Product ID", "ID do Produto"},
+        {"Category", "Categoria"},
+        {"Sub-Category", "Subcategoria"},
+        {"Product Name", "Nome do Produto"},
+        {"Sales", "Vendas"},
+        {"Quantity", "Quantidade"},
+        {"Discount", "Desconto"},
+        {"Profit", "Lucro"}
+    })
+    ´´´m
+---
+
+### ✅ Ajuste de Tipos de Dados  
+
+Após a tradução dos cabeçalhos, foi realizado o ajuste dos tipos de dados para garantir a correta análise e visualização:
+
+- `Data do Pedido` → Tipo **Data** (formato: **Português - BR**).  
+- `Data de Envio` → Tipo **Data** (formato: **Português - BR**).  
+- `Vendas` → Tipo **Número Decimal**.  
+- `Lucro` → Tipo **Número Decimal**.  
+- `Quantidade` → Tipo **Número Inteiro**.  
+- `Desconto` → Tipo **Número Decimal** (ajuste de localidade).  
+- `ID da Linha` → Tipo **Número Inteiro**.
+
+---
+
+### ✅ Verificação de Valores Nulos
+
+O próximo passo na transformação e limpeza dos dados foi verificar a existência de valores nulos ou faltantes nas colunas do dataset.
+
+Essa verificação foi realizada utilizando as próprias funcionalidades do Power BI Desktop, no editor do Power Query, que permite identificar rapidamente linhas ou colunas com dados ausentes.
+
+- Colunas analisadas para valores nulos incluíram:  
+  `ID do Pedido`, `Data do Pedido`, `Data de Envio`, `Vendas`, `Lucro`, entre outras importantes para a análise.
+
+- Caso fossem encontrados valores nulos, o plano seria tratá-los conforme a necessidade (remoção, substituição, imputação), porém, neste dataset, não foram identificados valores nulos significativos, o que facilitou o prosseguimento da análise.
+
+---
 
 
