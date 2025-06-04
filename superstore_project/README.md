@@ -645,3 +645,122 @@ A modelagem correta é fundamental para garantir uma análise consistente, ágil
 ✅ Separação clara de domínios de dados  
 
 ---
+
+## 5️⃣ Criação das Medidas DAX
+
+Após a modelagem do banco e a criação dos relacionamentos entre as tabelas, o próximo passo foi a construção de **Medidas DAX**. Essas medidas permitem realizar cálculos dinâmicos e análises avançadas nos dashboards.
+
+As principais medidas criadas foram:
+
+- **Total de Vendas**  
+
+  ```dax
+      ReceitaTotal = SUM(VENDAS[Vendas])
+  
+  
+- **Lucro Total**
+
+  ```dax
+      LucroTotal = SUM(VENDAS[Lucro])
+  
+
+- **Margem de Lucro**
+
+  ```dax
+      MargemLucro = DIVIDE([LucroTotal], [ReceitaTotal], 0)
+  
+- **Quantidades Vendidas**
+
+  ```dax
+      QuantidadeVendida = SUM(VENDAS[Quantidade])
+
+- **Tempo de Entrega**  
+  Foi criada uma **coluna calculada** na tabela **PEDIDOS**.  
+  Cálculo da diferença em dias entre a data do pedido e a data de envio.
+
+  ```dax
+      TempoEntrega = DATEDIFF(PEDIDOS[Data do Pedido], PEDIDOS[Data de Envio], DAY)
+
+- **Tempo Médio de Entrega**  
+  Foi o tempo médio de entrega calculado na coluna calculada anteriormente.
+
+    ```dax
+        TempoMédioEntrega = AVERAGE(PEDIDOS[TempoEntrega])
+
+- **Colunas Calculadas na Tabela CLIENTES**  
+
+Para responder a uma das perguntas de negócio, foram criadas **duas colunas calculadas** na tabela **CLIENTES**:  
+
+1️⃣ **Total de Compras**  
+Conta o total de compras realizadas por cada cliente, utilizando a função `RELATEDTABLE`.
+
+    ```dax
+        Total de Compras = COUNTROWS(RELATEDTABLE(VENDAS))
+        
+- **Colunas Calculadas na Tabela CLIENTES**  
+
+Para responder a uma das perguntas de negócio, foram criadas **duas colunas calculadas** na tabela **CLIENTES**:  
+
+1️⃣ **Total de Compras**  
+Conta o total de compras realizadas por cada cliente, utilizando a função `RELATEDTABLE`.
+
+    ```dax
+        Total de Compras = COUNTROWS(RELATEDTABLE(VENDAS))
+
+2️⃣ **Tipo de Cliente**  
+Classifica o cliente como **"Recorrente"** ou **"Novo"**, com base no total de compras.
+
+    ```dax
+    Tipo de Cliente = 
+        IF(
+            CLIENTES[Total de Compras] > 2,
+            "Recorrente",
+            "Novo"
+        )
+                )
+
+Para estabelecer um parâmetro para definirmos quais clientes são novos e quais são recorrentes, como é um projeto com fins de aprendizado, decidimos optar que:
+
+- Clientes com mais de duas compras no loja são considerados **clientes recorrentes**;
+- Clientes com duas ou menos compras são considerados **clientes novos**.
+
+Mas o ideal, em um contexto real, é consultar a área de negócio e checar qual o parâmetro condicional adequado para a situação.
+
+A partir das colunas calculadas anteriormente, fizemos mais 3 novas medidas que serão utilizadas:
+
+1. **Receita de Vendas Não Recorrentes (Novas):**
+
+    ```dax
+    Vendas Não Recorrentes = 
+    CALCULATE(
+        SUM(VENDAS[Vendas]),
+        FILTER(
+            CLIENTES,
+            CLIENTES[Tipo de Cliente] = "Novo"
+        )
+    )
+
+2. **Receita de Vendas Recorrentes**
+
+    ```dax
+    Vendas Recorrentes = 
+    CALCULATE(
+        SUM(VENDAS[Vendas]),
+        FILTER(
+            CLIENTES,
+            CLIENTES[Tipo de Cliente] = "Recorrente"
+        )
+    )
+    
+3.**% de Vendas Recorrentes:**
+
+    ```dax
+    % Vendas Recorrentes = 
+    DIVIDE([Vendas Recorrentes], SUM(VENDAS[Vendas]), 0)
+
+
+Agora, com todas as medidas DAX devidamente criadas, podemos passar para a próxima etapa, que é a criação dos dashboards em si.
+
+## 📊 6️⃣ Dashboards e Análise de Resultados
+
+Nesta etapa, foram desenvolvidos **5 dashboards interativos** no Power BI, cada um com foco em responder às perguntas de negócio definidas anteriormente. Abaixo estão os detalhes dos principais painéis:
