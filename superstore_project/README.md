@@ -217,4 +217,333 @@ Como este é um **projeto pessoal com foco em aprendizado**, foi decidido adotar
 - Esta padronização foi realizada diretamente no **Power Query**, utilizando o recurso de **mesclagem de consultas** e **coluna condicional** para substituir os IDs conforme a regra estabelecida.
 
 ---
+#### 🛠️ Implementação da Solução - Caso 1
 
+Para resolver o problema de **mesmos nomes de produtos com diferentes IDs**, foi criada uma **tabela auxiliar** no **Power Query** para identificar esses casos e gerar a informação do **ID padrão** para cada nome duplicado.
+
+**Passos realizados:**
+
+1. **Agrupar** os dados por `Nome do Produto` e **listar** todos os `IDs distintos` associados a cada nome.
+2. **Filtrar** apenas os casos onde há **mais de um ID** para o mesmo nome.
+3. **Criar uma coluna** com o **ID padrão**, que corresponde ao **primeiro ID registrado** para aquele nome.
+4. Utilizar essa tabela auxiliar para **substituir os IDs** nos dados principais.
+
+---
+
+**Código M utilizado para criar a tabela auxiliar:**
+
+    ```m
+    let
+        Fonte = #"Sample - Superstore - Copia",
+    
+        // Agrupar por nome e contar IDs distintos
+        NomesComProblemas = Table.Group(Fonte, {"Nome do Produto"}, {
+            {"IDsDistintos", each List.Distinct([ID do Produto]), type list},
+            {"Contagem", each List.Count(List.Distinct([ID do Produto])), type number}
+        }),
+    
+        // Filtrar apenas nomes com problemas
+        NomesProblematicos = Table.SelectRows(NomesComProblemas, each [Contagem] > 1),
+        #"IDsDistintos Expandido" = Table.ExpandListColumn(NomesProblematicos, "IDsDistintos"),
+    
+        // Criar ID padrão para os IDs diferentes com o mesmo nome de produto
+        // Para o ID padrão usamos o primeiro ID registrado para o nome do produto
+        NomesProblematicosComIDPadrao = Table.AddColumn(NomesProblematicos, "IDPadrao", each List.First([IDsDistintos]))
+    in
+        NomesProblematicosComIDPadrao
+    ´´´m
+
+---
+
+#### 🛠️ Mesclagem e Correção dos IDs - Caso 1
+
+Após identificar os **valores problemáticos** com a **tabela auxiliar**, foi realizada uma **mesclagem** com a **tabela original copiada**, a fim de:
+
+✅ Trazer o **ID padrão** para cada registro com problemas.  
+✅ Criar uma **nova coluna condicional** chamada **"ID Produto Final"**, contendo:  
+- O **ID corrigido** para os produtos que apresentavam inconsistência.  
+- O **ID original** para os produtos que não precisavam de correção.
+
+---
+
+**Passos realizados:**
+
+1. **Mesclar** a tabela original (`Sample - Superstore - Copia`) com a tabela `IDsProblematicos` utilizando a coluna `Nome do Produto`.
+2. **Expandir** a coluna `IDPadrao` da tabela mesclada.
+3. Criar a coluna **"ID Produto Final"** com uma **condição**:  
+   - Se houver um `IDPadrao`, então usá-lo.  
+   - Caso contrário, manter o `ID do Produto` original.
+4. **Reordenar** as colunas para melhor organização.
+
+---
+
+**Código M utilizado para mesclagem e criação da coluna condicional:**
+
+    ```m
+    // Mescla da tabela original com a tabela de IDs problemáticos
+    // Correção do ID de produto na coluna "ID Produto Final"
+    
+    let
+        Fonte = Table.NestedJoin(
+            #"Sample - Superstore - Copia", 
+            {"Nome do Produto"}, 
+            IDsProblematicos, 
+            {"Nome do Produto"}, 
+            "IDsProblematicos", 
+            JoinKind.LeftOuter
+        ),
+    
+        #"IDsProblematicos Expandido" = Table.ExpandTableColumn(
+            Fonte, 
+            "IDsProblematicos", 
+            {"IDPadrao"}, 
+            {"IDsProblematicos.IDPadrao"}
+        ),
+    
+        ColunaIDFinal = Table.AddColumn(
+            #"IDsProblematicos Expandido", 
+            "ID Produto Final", 
+            each if [IDsProblematicos.IDPadrao] = null then [ID do Produto] else [IDsProblematicos.IDPadrao]
+        ),
+    
+        #"Colunas Reordenadas" = Table.ReorderColumns(
+            ColunaIDFinal,
+            {
+                "ID da Linha", "ID do Pedido", "Data do Pedido", "Data de Envio", 
+                "Modo de Envio", "ID do Cliente", "Nome do Cliente", "Segmento", 
+                "País", "Cidade", "Estado", "CEP", "Região", "ID do Produto", 
+                "ID Produto Final", "Nome do Produto", "Categoria", "Subcategoria", 
+                "Vendas", "Quantidade", "Desconto", "Lucro", "IDsProblematicos.IDPadrao"
+            }
+        )
+    in
+        #"Colunas Reordenadas"
+    ´´´m
+    
+---
+
+#### ✅ Conclusão da Solução - Caso 1
+
+Com a aplicação das etapas descritas, foi possível **solucionar o primeiro problema**: a existência de **diferentes IDs para o mesmo nome de produto**.
+
+Através da **criação da tabela auxiliar**, **mesclagem** e **padronização do ID**, os dados agora apresentam uma **estrutura consistente e confiável**, permitindo análises mais precisas.
+
+---
+
+### 🚩 Próximo Passo: Tratamento do Problema 2
+
+Agora seguiremos para o **segundo problema identificado** na análise de qualidade dos dados:
+
+> **Produtos com o mesmo ID, mas associados a nomes diferentes.**
+
+Este tipo de inconsistência também compromete a integridade das análises e exige uma abordagem adequada para **padronizar as informações**.
+
+---
+
+## 🛠️ Caso 2: Mesmo ID de Produto para Nomes Diferentes
+
+### Problema identificado:
+
+O mesmo **ID de produto** aparecia vinculado a **nomes de produtos diferentes**, indicando um potencial erro de cadastro ou inconsistência nos dados.
+
+---
+
+### Decisão:
+
+Como se trata de um **projeto de aprendizado**, optou-se por realizar uma **ajuste técnico** para garantir a consistência da base de dados.
+
+---
+
+### Critério adotado:
+
+- Para cada **ID duplicado** (ou seja, associado a nomes distintos), foi mantido o **primeiro nome** de ocorrência vinculado ao ID original.
+- Para os demais nomes associados ao mesmo ID, o ID foi **ajustado**, adicionando-se o valor do **índice** ao **último dígito** do ID original, evitando assim repetições.
+
+---
+
+### Exemplo de ação:
+
+**Antes**  
+PROD123 → Cadeira Executiva X  
+PROD123 → Mesa de Reunião Y  
+
+**Depois**  
+PROD123 → Cadeira Executiva X  
+PROD124 → Mesa de Reunião Y  
+
+---
+
+### Ferramenta utilizada:
+
+Esta correção foi realizada diretamente no **Power Query**, utilizando:
+
+- Criação de uma **tabela auxiliar** para identificar todos os casos de **IDs compartilhados entre nomes diferentes**.
+- Utilização de um **índice** para numerar cada nome associado ao mesmo ID.
+- Definição de uma **regra de ajuste**:  
+  ➡️ O **primeiro nome** mantém o ID original.  
+  ➡️ Os **demais nomes** recebem uma variação no ID original, **somando o índice ao último dígito**.
+
+---
+
+### 🛠️ Código M para criação da tabela auxiliar
+
+        ```m
+        // Tabela de nomes problemáticos: nomes diferentes para o mesmo ID de produto
+        // A tabela mostra os nomes e IDs com problemas e cria um índice para cada nome diferente com o mesmo ID
+        
+        let
+            Fonte = #"Sample - Superstore - Copia",
+        
+            // Agrupar por ID e contar nomes distintos
+            IDsComProblemas = Table.Group(
+                Fonte, 
+                {"ID do Produto"}, 
+                {
+                    {"NomesDistintos", each List.Distinct([Nome do Produto]), type list},
+                    {"Contagem", each List.Count(List.Distinct([Nome do Produto])), type number}
+                }
+            ),
+        
+            // Filtrar apenas IDs com problemas
+            IDsProblematicos = Table.SelectRows(IDsComProblemas, each [Contagem] > 1),
+        
+            // Expandir os nomes distintos para análise
+            #"NomesDistintos Expandido" = Table.ExpandListColumn(IDsProblematicos, "NomesDistintos"),
+        
+            // Classificar as linhas por ID e Nome
+            #"Linhas Classificadas" = Table.Sort(
+                #"NomesDistintos Expandido",
+                {{"ID do Produto", Order.Descending}, {"NomesDistintos", Order.Descending}}
+            ),
+        
+            // Agrupar novamente por ID, mantendo a lista de nomes
+            #"Linhas Agrupadas" = Table.Group(
+                #"Linhas Classificadas", 
+                {"ID do Produto"}, 
+                {{"Dados", each _, type table [ID do Produto=nullable text, NomesDistintos=text, Contagem=number]}}
+            ),
+        
+            // Criar um índice para os nomes diferentes com o mesmo ID
+            // Exemplo: ID1 → nome1 = índice 0, nome2 = índice 1, e assim por diante
+            CriandoIndice = Table.TransformColumns(
+                #"Linhas Agrupadas",
+                {"Dados", each Table.AddIndexColumn(_, "Índice", 0, 1, Int64.Type)}
+            ),
+        
+            // Expandir novamente para visualização e uso posterior
+            #"Dados Expandido" = Table.ExpandTableColumn(
+                CriandoIndice, 
+                "Dados", 
+                {"ID do Produto", "NomesDistintos", "Índice"}, 
+                {"Dados.ID do Produto", "Dados.NomesDistintos", "Dados.Índice"}
+            )
+        in
+            #"Dados Expandido"
+        ´´´m
+
+---
+
+## 🛠️ Continuação da Solução do Problema 2: Mesclagem e Ajuste Final dos IDs
+
+### Objetivo:
+
+Realizar a **mesclagem** entre a tabela já ajustada na **Solução do Problema 1** e a **tabela auxiliar** criada na **Solução do Problema 2**.  
+Em seguida, criar uma **coluna condicional** que implementa a **regra final de correção** dos IDs, garantindo que:
+
+- O primeiro nome relacionado a um mesmo ID permanece com o ID original.
+- Os demais nomes com o mesmo ID recebem um **ID ajustado**, conforme o índice criado anteriormente.
+
+---
+
+### Processo realizado:
+
+1. **Mescla** da tabela mesclada do problema 1 (`Consulta2`) com a tabela auxiliar `NomesProdutosProblematicos`.
+2. **Criação de coluna condicional** (`Novo ID Produto`) que aplica a regra de ajuste:
+   - Se não há problema, mantém o `ID Produto Final`.
+   - Se há problema e o índice é `0`, mantém o `ID Produto Final`.
+   - Se há problema e o índice é maior que `0`, cria um novo ID adicionando o índice ao **último dígito do ID**.
+
+---
+
+### 🛠️ Código M para mesclagem e ajuste final:
+
+        ```m
+        // Mescla 2: Mescla da tabela ajustada no problema 1 com a tabela de nomes problemáticos
+        // Cria a coluna condicional para ajustar IDs repetidos com nomes diferentes
+        
+        let
+            Fonte = Table.NestedJoin(
+                Consulta2, 
+                {"ID Produto Final", "Nome do Produto"}, 
+                #"NomesProdutosProblematicos", 
+                {"ID do Produto", "Dados.NomesDistintos"}, 
+                "NomesProdutosProblematicos", 
+                JoinKind.LeftOuter
+            ),
+        
+            #"NomesProdutosProblematicos Expandido" = Table.ExpandTableColumn(
+                Fonte, 
+                "NomesProdutosProblematicos", 
+                {"Dados.ID do Produto", "Dados.NomesDistintos", "Dados.Índice"}, 
+                {
+                    "NomesProdutosProblematicos.Dados.ID do Produto", 
+                    "NomesProdutosProblematicos.Dados.NomesDistintos", 
+                    "NomesProdutosProblematicos.Dados.Índice"
+                }
+            ),
+        
+            // Coluna condicional que aplica a regra de ajuste de ID
+            #"Coluna Condicional Adicionada" = Table.AddColumn(
+                #"NomesProdutosProblematicos Expandido", 
+                "Novo ID Produto", 
+                each 
+                    if [#"NomesProdutosProblematicos.Dados.ID do Produto"] = null then
+                        [ID Produto Final]
+                    else
+                        if [#"NomesProdutosProblematicos.Dados.Índice"] = 0 then
+                            [ID Produto Final]
+                        else
+                            let
+                                prefixo = Text.Start(
+                                    [#"NomesProdutosProblematicos.Dados.ID do Produto"], 
+                                    Text.Length([#"NomesProdutosProblematicos.Dados.ID do Produto"]) - 5
+                                ),
+                                sufixoNum = Number.FromText(
+                                    Text.End([#"NomesProdutosProblematicos.Dados.ID do Produto"], 5)
+                                ) + [#"NomesProdutosProblematicos.Dados.Índice"],
+                                novoID = prefixo & Text.PadStart(Text.From(sufixoNum), 5, "0")
+                            in
+                                novoID
+            )
+        in
+            #"Coluna Condicional Adicionada"
+        ´´´m
+
+---
+
+## ✅ Conclusão das Soluções dos Problemas e das Transformações e Limpeza dos dados
+
+Com estas duas etapas, os problemas de inconsistência nos IDs de produtos foram totalmente solucionados.
+
+Agora, temos a tabela final de Vendas da Superstore completa, limpa e padronizada, pronta para:
+
+- Criar os relacionamentos no Power BI.
+- Construir o esquema estrela para modelagem dos dados.
+- Desenvolver as análises e visualizações interativas nos dashboards.
+
+Este é o ponto de partida para gerar insights confiáveis e consistentes com base em dados organizados e corrigidos.
+
+---
+
+## 4️⃣ Modelagem das Tabelas com Esquema Estrela
+
+No próximo passo, realizaremos a modelagem das tabelas utilizando o **esquema estrela**, criando os relacionamentos entre a tabela de fatos (tabela principal de vendas) e as tabelas de dimensões (segmentadas).
+
+### Por que utilizar o esquema estrela e segmentar a tabela principal?
+
+- **Melhoria na performance:** A segmentação da tabela principal em tabelas de dimensão e fato reduz a redundância e otimiza a velocidade das consultas no Power BI.
+- **Facilidade na análise:** Permite uma organização lógica dos dados, facilitando a criação de filtros, segmentações e análises dinâmicas.
+- **Manutenção simplificada:** Alterações e atualizações nas dimensões ou na tabela de fatos podem ser feitas de forma independente.
+- **Criação de dashboards eficientes:** Com o esquema estrela, os relacionamentos são mais claros e a construção de relatórios interativos torna-se mais ágil e intuitiva.
+
+A modelagem correta é fundamental para garantir uma análise consistente, ágil e confiável dos dados de vendas, servindo como base para todas as visualizações e insights que serão desenvolvidos.
