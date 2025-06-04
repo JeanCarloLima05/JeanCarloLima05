@@ -137,5 +137,84 @@ Essa verificação foi realizada utilizando as próprias funcionalidades do Powe
 - Caso fossem encontrados valores nulos, o plano seria tratá-los conforme a necessidade (remoção, substituição, imputação), porém, neste dataset, não foram identificados valores nulos significativos, o que facilitou o prosseguimento da análise.
 
 ---
+### ✅ Verificação de Duplicatas e Inconsistências nos Dados
 
+Após verificar que **não havia valores nulos** no dataset, o próximo passo foi realizar uma análise para identificar possíveis **duplicatas ou inconsistências** nos dados, com foco na integridade da base para garantir análises confiáveis.
+
+Durante essa análise, foram identificados dois problemas importantes:
+
+---
+
+#### 🚨 Problema 1: Nomes de Produtos Iguais para IDs de Produtos Diferentes
+
+- Foi identificado que alguns **nomes de produtos** se repetiam, mas estavam associados a **IDs de produtos diferentes**.
+- Esse tipo de inconsistência pode indicar erro de cadastro, divergência no sistema de origem ou problemas na integração dos dados.
+- **Impacto**: pode gerar distorções nas análises relacionadas a vendas por produto e categoria.
+
+**Exemplo hipotético:**  
+| ID do Produto | Nome do Produto        |
+|---------------|-----------------------|
+| PROD123       | Cadeira Executiva X   |
+| PROD789       | Cadeira Executiva X   |
+
+---
+
+#### 🚨 Problema 2: IDs de Produtos Iguais para Nomes de Produtos Diferentes
+
+- Também foi detectado o inverso: **mesmos IDs de produto** associados a **nomes diferentes de produtos**.
+- Isso é ainda mais grave, pois indica uma falha no controle de identificação única de produtos.
+- **Impacto**: pode comprometer severamente as análises de performance de produtos, inventário e vendas.
+
+**Exemplo hipotético:**  
+| ID do Produto | Nome do Produto        |
+|---------------|-----------------------|
+| PROD456       | Impressora Laser A     |
+| PROD456       | Impressora Multifuncional B |
+
+---
+
+### ✅ Ações Planejadas
+
+- **Analisar a origem dessas inconsistências**, verificando se são erros sistemáticos ou casos isolados.
+- **Definir critérios de tratamento**, como:
+  - Unificação de registros duplicados.
+  - Correção manual ou automática com base em regras de negócio.
+  - Comunicação com a área responsável pelo cadastro de produtos.
+ 
+---
+
+### ✅ Tratamento das Inconsistências - Decisões e Ações
+
+Como este é um **projeto pessoal com foco em aprendizado**, foi decidido adotar as seguintes medidas para **corrigir as inconsistências identificadas**:
+
+---
+
+#### 🛠️ Caso 1: Mesmos Nomes para Diferentes IDs de Produto
+
+**Problema identificado:**  
+- O mesmo **nome de produto** aparecia vinculado a **diferentes IDs de produto**.
+
+**Decisão:**  
+- **Padronizar os IDs de produto**, unificando todos os registros com o **mesmo nome** sob um **único ID**.
+
+**Critério adotado:**  
+- Para cada nome duplicado, foi selecionado o **primeiro ID de ocorrência** como o **ID principal**.
+- Todos os registros com o mesmo nome foram atualizados para utilizar esse **ID principal**.
+
+**Exemplo de ação:**
+
+| Antes                               |
+|--------------------------------------|
+| PROD123 → Cadeira Executiva X       |
+| PROD789 → Cadeira Executiva X       |
+
+| Depois                              |
+|--------------------------------------|
+| PROD123 → Cadeira Executiva X       |
+| PROD123 → Cadeira Executiva X       |
+
+**Ferramenta utilizada:**  
+- Esta padronização foi realizada diretamente no **Power Query**, utilizando o recurso de **mesclagem de consultas** e **coluna condicional** para substituir os IDs conforme a regra estabelecida.
+
+---
 
