@@ -783,3 +783,7 @@ Onde será respondido a seguinte pergunta de negócio: **Qual é a Receita Total
 - 📌 Os principais mês que se destacaram em Receita de Vendas foi o mês de **Setembro** e **Novembro**
 
 Todos os Gráficos são interativos, podendo ser alterado o mês e ano para obter análises mais detalhadas.
+
+### **Dashboard Visão Geral Vendas**
+
+
