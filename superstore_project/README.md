@@ -42,4 +42,71 @@ Durante o desenvolvimento, diversas **questões estratégicas** foram elaboradas
 **🔔 Observação:**  
 Todas as perguntas, análises e interpretações realizadas são **fictícias** e têm como principal finalidade a **simulação de um cenário realista** para **fins de aprendizado e desenvolvimento de competências na área de análise de dados**.
 
+## 🛠️ Processos de ETL e Modelagem dos Dados
+
+Este projeto foi inteiramente desenvolvido no **Power BI Desktop**, desde a importação e transformação dos dados até a criação do modelo e dashboards. Todas as etapas foram cuidadosamente realizadas para garantir uma análise precisa e eficiente.
+
+---
+
+## 1️⃣ Importação dos Dados
+
+O processo iniciou com a importação do dataset:
+
+1. Abra o Power BI Desktop.
+2. Selecione a opção **"Obter Dados"** > **"Texto/CSV"**.
+3. Navegue até o arquivo: `Sample_Superstore_Sales.csv`.
+4. Revise a pré-visualização e clique em **"Carregar"**.
+
+---
+
+## 2️⃣ Cópia da Tabela Original
+
+Antes de realizar qualquer transformação ou limpeza, foi criada uma **cópia da tabela original**.  
+
+✅ A tabela original foi mantida **sem alterações**, garantindo a integridade para futuras consultas ou validações.  
+
+✅ Todas as transformações, limpezas e análises foram realizadas a partir da **cópia da tabela**.  
+
+**Exemplo de nomeação:**
+- `Sample_Superstore_Original` → **Não alterada**  
+- `Sample_Superstore_Tratada` → **Usada para as transformações**  
+
+---
+
+## 3️⃣ Transformação, Limpeza e Análise Exploratória
+
+As transformações foram realizadas utilizando o **Power Query**, com a **Linguagem M**, incluindo as seguintes etapas principais:
+
+---
+
+### ✅ Tradução dos Cabeçalhos
+
+Para facilitar a interpretação e o desenvolvimento da análise, todos os nomes das colunas foram traduzidos do inglês para o português, utilizando o seguinte código M:  
+
+```m
+// Tradução dos cabeçalhos, para melhor entendimento
+#"Cabeçalhos Traduzidos" = Table.RenameColumns(#"Cabeçalhos Promovidos", {
+    {"Row ID", "ID da Linha"},
+    {"Order ID", "ID do Pedido"},
+    {"Order Date", "Data do Pedido"},
+    {"Ship Date", "Data de Envio"},
+    {"Ship Mode", "Modo de Envio"},
+    {"Customer ID", "ID do Cliente"},
+    {"Customer Name", "Nome do Cliente"},
+    {"Segment", "Segmento"},
+    {"Country", "País"},
+    {"City", "Cidade"},
+    {"State", "Estado"},
+    {"Postal Code", "CEP"},
+    {"Region", "Região"},
+    {"Product ID", "ID do Produto"},
+    {"Category", "Categoria"},
+    {"Sub-Category", "Subcategoria"},
+    {"Product Name", "Nome do Produto"},
+    {"Sales", "Vendas"},
+    {"Quantity", "Quantidade"},
+    {"Discount", "Desconto"},
+    {"Profit", "Lucro"}
+}),
+
 
