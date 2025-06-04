@@ -764,3 +764,22 @@ Agora, com todas as medidas DAX devidamente criadas, podemos passar para a próx
 ## 📊 6️⃣ Dashboards e Análise de Resultados
 
 Nesta etapa, foram desenvolvidos **5 dashboards interativos** no Power BI, cada um com foco em responder às perguntas de negócio definidas anteriormente. Abaixo estão os detalhes dos principais painéis:
+
+---
+
+### 🖥️ **Dashboard 1: Visão Geral de Vendas**
+**Objetivo:** Analisar desempenho global e tendências temporais.
+Onde será respondido a seguinte pergunta de negócio: **Qual é a Receita Total e Lucro por ano/mês ?**
+
+**Visualizações principais:**
+- 📊 Gráfico de Barras: Receita Total e Lucro Total de Vendas por Ano
+- 📈 Gráfico de linhas: Variação da Receita de Vendas mensais
+- 🏷️ Cartões KPIs: 
+  - Receita Total: `R$ 1,13Bi` 
+  - Lucro Total: `1,80Bi`
+
+**Principais Insights:**
+- 🔍 2017: Foi o ano com maior Receita e Lucros da empresa (que apresentou uma evolução crescente durante os anos)
+- 📌 Os principais mês que se destacaram em Receita de Vendas foi o mês de **Setembro** e **Novembro**
+
+Todos os Gráficos são interativos, podendo ser alterado o mês e ano para obter análises mais detalhadas.
