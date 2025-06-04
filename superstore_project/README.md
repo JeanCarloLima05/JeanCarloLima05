@@ -786,4 +786,5 @@ Todos os Gráficos são interativos, podendo ser alterado o mês e ano para obte
 
 ### **Dashboard Visão Geral Vendas**
 
+![Dashboard Vendas](./Dashboard_Vendas.png)
 
