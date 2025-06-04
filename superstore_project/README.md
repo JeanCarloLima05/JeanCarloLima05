@@ -547,3 +547,101 @@ No próximo passo, realizaremos a modelagem das tabelas utilizando o **esquema e
 - **Criação de dashboards eficientes:** Com o esquema estrela, os relacionamentos são mais claros e a construção de relatórios interativos torna-se mais ágil e intuitiva.
 
 A modelagem correta é fundamental para garantir uma análise consistente, ágil e confiável dos dados de vendas, servindo como base para todas as visualizações e insights que serão desenvolvidos.
+
+---
+
+## 🗂️ Esquema do Modelo de Dados Relacional
+
+### **Diagrama**
+
+![Diagrama Relacional](./Diagrama_Relacional.png)
+
+---
+
+## 📄 Descrição das Tabelas e Relacionamentos
+
+### **VENDAS**
+
+| Campo            | Tipo     | Descrição                                     |
+| ---------------- | -------- | --------------------------------------------- |
+| ID do Vendas     | PK       | Identificador único da venda                  |
+| ID do Cliente    | FK       | Relaciona com tabela CLIENTES                 |
+| ID do Produto    | FK       | Relaciona com tabela PRODUTOS                 |
+| CEP              | FK       | Relaciona com tabela LOCALIDADE               |
+| ID do Pedido     | FK       | Relaciona com tabela PEDIDOS                  |
+| Quantidade       | Numérico | Quantidade de produtos vendidos               |
+| Vendas (valor)   | Numérico | Valor total da venda                          |
+| Desconto         | Numérico | Desconto aplicado                             |
+| Lucro            | Numérico | Lucro obtido com a venda                       |
+
+---
+
+### **CLIENTES**
+
+| Campo           | Tipo  | Descrição                            |
+| --------------- | ----- | ------------------------------------ |
+| ID do Cliente   | PK    | Identificador único do cliente       |
+| Nome do Cliente | Texto | Nome completo do cliente             |
+| Segmento        | Texto | Segmento ao qual o cliente pertence  |
+
+**Relacionamento:** 1:N com VENDAS
+
+---
+
+### **PRODUTOS**
+
+| Campo           | Tipo  | Descrição                            |
+| --------------- | ----- | ------------------------------------ |
+| ID do Produto   | PK    | Identificador único do produto       |
+| Nome do Produto | Texto | Nome do produto                      |
+| Subcategoria    | Texto | Subcategoria do produto              |
+| Categoria       | Texto | Categoria do produto                 |
+
+**Relacionamento:** 1:N com VENDAS
+
+---
+
+### **LOCALIDADE**
+
+| Campo  | Tipo  | Descrição                              |
+| ------ | ----- | -------------------------------------- |
+| CEP    | PK    | Código de Endereçamento Postal         |
+| País   | Texto | País de origem                         |
+| Estado | Texto | Estado de origem                       |
+| Região | Texto | Região do país                         |
+| Cidade | Texto | Cidade de origem                       |
+
+**Relacionamento:** 1:N com VENDAS
+
+---
+
+### **PEDIDOS**
+
+| Campo           | Tipo  | Descrição                            |
+| --------------- | ----- | ------------------------------------ |
+| ID do Pedido    | PK    | Identificador único do pedido        |
+| Data do Pedido  | Data  | Data em que o pedido foi realizado   |
+| Data de Envio   | Data  | Data em que o pedido foi enviado     |
+| Modo de Envio   | Texto | Modalidade de envio escolhida        |
+
+**Relacionamento:** 1:N com VENDAS
+
+---
+
+## 🔗 Resumo dos Relacionamentos
+
+- CLIENTES → VENDAS: 1:N (1 para Muitos)
+- PRODUTOS → VENDAS: 1:N (1 para Muitos)
+- LOCALIDADE → VENDAS: 1:N (1 para Muitos)
+- PEDIDOS → VENDAS: 1:N (1 para Muitos)
+
+---
+
+## ✅ Benefícios dessa estrutura
+
+✅ Eliminação de redundância  
+✅ Melhoria na integridade referencial  
+✅ Facilidade de manutenção e expansão  
+✅ Separação clara de domínios de dados  
+
+---
