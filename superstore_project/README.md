@@ -826,10 +826,30 @@ Todos os Gráficos são interativos, podendo ser alterado pelo nome de um produt
 **Principais Análises:**
 - 🔍 Região **Oeste** (West): Foi a região que apresentou a mairo Receita de Vendas, seguidas pelas regiões **Central** e **Leste** respectivamente.
 - 🔍 A Cidade que apresentou maior Receita foi a cidade de **Houston**, seguida pela cidade de **New York** e **Los Angeles**.
-- 🔍 O Estado com maior Receita foi o estado da **California** e o com Menor foi o eswtado de **North Dakota**
+- 🔍 O Estado com maior Receita foi o estado da **California** e o com Menor foi o eswtado de **North Dakota**.
 
 Todos os Gráficos são interativos, podendo ser alterado pelo nome da Cidade específica para obter análises mais detalhadas.
 
 ### **Dashboard Desempenho das Regiões**
 
 ![Dashboard Regiao](./Dashboard_Regiao.png)
+
+---
+
+### 🖥️ **Dashboard 4: Desempenho dos Pedidos**
+**Objetivo:** Analisar desempenho dos Pedidos  
+**Visualizações principais:**
+- 📊 Gráfico de Barras Horizontal: Mostrando o Lucro Totla e a Receita totap por Modo de Envio.
+- 📊 Gráfico de Barras Veticais: Mostrando o Tempo Médio de Envio por Mês.
+- 🍕 Gráfico dePizza: Mostra a porcentagem do número de pedidos  por Modo de Envio.
+- 📈 Gráfico de Área: Variação do Modo de Envio durante os anos e meses
+- 🏷️ Cartões KPIs:
+    -  Tempo Médio entre Pedido e Envio (em dias): 3,96 dias, aproximadamente 4 dias
+
+**Principais Análises:**
+- 🔍 Notamos que o tempo medio entre o Pedido e o Envio é de 4 dias.
+- 🔍 O Modo de Envio **Standard Class** foi o que apresento maior receita e Lucro entre os outros modos de envio.
+- 🔍 Notamos que durante os meses o Tempo Médio de Envio se manteve estável
+- 🔍 O Modo de Envio Standard Class teve uma crescente no decorre dos anos em relação ao outros Modos de Envio e ao seu proprio desempenho.
+
+Todos os Gráficos são interativos, podendo ser alterado pelo Modo de Envio específica para obter análises mais detalhadas.
