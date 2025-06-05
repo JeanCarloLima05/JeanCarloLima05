@@ -778,7 +778,7 @@ Onde será respondido a seguinte pergunta de negócio: **Qual é a Receita Total
   - Receita Total: `R$ 1,13Bi` 
   - Lucro Total: `1,80Bi`
 
-**Principais Insights:**
+**Principais Análises:**
 - 🔍 2017: Foi o ano com maior Receita e Lucros da empresa (que apresentou uma evolução crescente durante os anos)
 - 📌 Os principais mês que se destacaram em Receita de Vendas foi o mês de **Setembro** e **Novembro**
 
@@ -787,4 +787,24 @@ Todos os Gráficos são interativos, podendo ser alterado o mês e ano para obte
 ### **Dashboard Visão Geral Vendas**
 
 ![Dashboard Vendas](./Dashboard_Vendas.png)
+
+---
+
+### 🖥️ **Dashboard 2: Desempenho dos Produtos**
+**Objetivo:** Analisar desempenho dos produtos por categorias  
+**Visualizações principais:**
+- 📊 Gráfico de Barras Horizontais: Mostrando a Margem de Lucro por Categoria de Produtos.
+- 📊 Gráfico de Barras Verticais: Mostrando os Top 10 Produtos masi Vendidos por Quantidade.
+- 📋 Matriz: Mostra a Receita total, Lucro Total, Quantidade Vendida e Margem de Lucro para cada categoria e suas subcategorias, permitindo uma análise mais profunda.
+- 🏷️ Cartões KPIs: 
+  - Número de Produtos Vendidos: `37873` produtos 
+
+**Principais Análises:**
+- 🔍 Office Supplies (Materiais de Escritório): Foi a categoria de produtos que teve a maior margem de Lucro, seguido da categoria de Tecnologias.
+- 🔍 Os 10 produtos mais Vendidos estão justamente relacionados a categoria de Materiais de Escritório
+- 🔍 Podemos notar ainda pela Matriz que a categoria de Forniture (Móveis), apresentou a Maior Receita, mas obteve a Menor margem de Lucro entre as categorias.
+- 📌 O número de produtos Vendidos foi de 37873 produtos
+
+Todos os Gráficos são interativos, podendo ser alterado pelo nome de um produto específico para obter análises mais detalhadas.
+
 
