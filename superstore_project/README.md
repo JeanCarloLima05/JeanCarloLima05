@@ -786,7 +786,7 @@ Todos os Gráficos são interativos, podendo ser alterado o mês e ano para obte
 
 ### **Dashboard Visão Geral Vendas**
 
-![Dashboard Vendas](./Dashboard_Vendas.png)
+![Dashboard Vendas](dashboard/Dashboard_Vendas.png)
 
 ---
 
@@ -809,7 +809,7 @@ Todos os Gráficos são interativos, podendo ser alterado pelo nome de um produt
 
 ### **Dashboard Desempenho dos Produtos**
 
-![Dashboard Produtos](./Dashboard_Produtos.png)
+![Dashboard Produtos](dashboard/Dashboard_Produtos.png)
 
 ---
 
@@ -832,7 +832,7 @@ Todos os Gráficos são interativos, podendo ser alterado pelo nome da Cidade es
 
 ### **Dashboard Desempenho das Regiões**
 
-![Dashboard Regiao](./Dashboard_Regiao.png)
+![Dashboard Regiao](dashboard/Dashboard_Regiao.png)
 
 ---
 
@@ -856,7 +856,7 @@ Todos os Gráficos são interativos, podendo ser alterado pelo Modo de Envio esp
 
 ### **Dashboard Desempenho dos Pedidos**
 
-![Dashboard Pedidos](./Dashboard_Pedidos.png)
+![Dashboard Pedidos](dashboard/Dashboard_Pedidos.png)
 
 ---
 
@@ -884,7 +884,7 @@ Todos os Gráficos são interativos, podendo ser alterado pelo Segmento de Clien
 
 ### **Dashboard Desempenho dos Clientes**
 
-![Dashboard Clientes](./Dashboard_Clientes.png)
+![Dashboard Clientes](dashboard/Dashboard_Clientes.png)
 
 ---
 
