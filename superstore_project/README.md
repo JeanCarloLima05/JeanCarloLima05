@@ -554,7 +554,7 @@ A modelagem correta é fundamental para garantir uma análise consistente, ágil
 
 ### **Diagrama**
 
-![Diagrama Relacional](./Diagrama_Relacional.png)
+![Diagrama Relacional](Relacionamentos/Diagrama_Relacional.png)
 
 ---
 
