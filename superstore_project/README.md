@@ -807,4 +807,6 @@ Todos os Gráficos são interativos, podendo ser alterado o mês e ano para obte
 
 Todos os Gráficos são interativos, podendo ser alterado pelo nome de um produto específico para obter análises mais detalhadas.
 
+### **Dashboard Desempenho dos Produtos**
 
+![Dashboard Produtos](./Dashboard_Produtos.png)
