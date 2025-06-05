@@ -881,3 +881,7 @@ Podemos Criar um perfil de novos clientes com base nos dados apresentado, mas tu
 Assim é importante apresentar os dados, mostrar os indicadores e perguntar a área de negócio qual a melhor estrátegia para avaliar o perfil de plientes da empresa. Se temos a ideia de atrair novos clientes ou menter os cleintes Recorrentes.
 
 Todos os Gráficos são interativos, podendo ser alterado pelo Segmento de Clientes específica para obter análises mais detalhadas.
+
+### **Dashboard Desempenho dos Clientes**
+
+![Dashboard Clientes](./Dashboard_Clientes.png)
