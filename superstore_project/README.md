@@ -829,3 +829,7 @@ Todos os Gráficos são interativos, podendo ser alterado pelo nome de um produt
 - 🔍 O Estado com maior Receita foi o estado da **California** e o com Menor foi o eswtado de **North Dakota**
 
 Todos os Gráficos são interativos, podendo ser alterado pelo nome da Cidade específica para obter análises mais detalhadas.
+
+### **Dashboard Desempenho das Regiões**
+
+![Dashboard Regiao](./Dashboard_Regiao.png)
