@@ -841,7 +841,7 @@ Todos os Gráficos são interativos, podendo ser alterado pelo nome da Cidade es
 **Visualizações principais:**
 - 📊 Gráfico de Barras Horizontal: Mostrando o Lucro Totla e a Receita totap por Modo de Envio.
 - 📊 Gráfico de Barras Veticais: Mostrando o Tempo Médio de Envio por Mês.
-- 🍕 Gráfico dePizza: Mostra a porcentagem do número de pedidos  por Modo de Envio.
+- 🍕 Gráfico de Pizza: Mostra a porcentagem do número de pedidos  por Modo de Envio.
 - 📈 Gráfico de Área: Variação do Modo de Envio durante os anos e meses
 - 🏷️ Cartões KPIs:
     -  Tempo Médio entre Pedido e Envio (em dias): 3,96 dias, aproximadamente 4 dias
@@ -857,3 +857,27 @@ Todos os Gráficos são interativos, podendo ser alterado pelo Modo de Envio esp
 ### **Dashboard Desempenho dos Pedidos**
 
 ![Dashboard Pedidos](./Dashboard_Pedidos.png)
+
+---
+
+### 🖥️ **Dashboard 5: Desempenho dos Clientes**
+**Objetivo:** Analisar desempenho dos Clientes  
+**Visualizações principais:**
+- 🔄 Gráfico de Rosca: Mostrando o Impacto dos Clientes **Recorrentes** e **Novos** Clientes na Receita Total de Vendas.
+- 🍕 Gráfico de Pizza: Mostra as porcentagem das Receitas de vendas dos Clientes **Recorrentes** por Segmento de Clientes.
+- 🍕 Gráfico de Pizza: Mostra as porcentagem das Receitas de vendas dos Clientes **Novos** por Segmento de Clientes.
+- 📊 Gráfico de Barras Horizontal: Mostrando os Top 5 Produtos que geraram maior receita pelos **Novos** Clientes.
+- 📊 Gráfico de Barras Horizontal: Mostrando a Receita de VEndas dos Novos Clientes por categoria de Produtos
+- 🏷️ Cartões KPIs:
+    -  Número de clientes Cadastrados
+
+**Principais Análises:**
+- 🔍 Notamos que os Clientes **Recorrentes** correnpondem a masi de `99%` da Receita Total de Vendas.
+- 🔍 O Segmento de clientes correspondente as Vendas para os Clientes Recorrentes são de Consumo.
+- 🔍 Já o Segmento de clientes correspondente as Vendas para os Clientes Novos são de Corporativos.
+- 🔍 A categoria de Produto que obteve mairo Receita dos Clientes Novos foi a categoria de Furniture (Mobília).
+
+Podemos Criar um perfil de novos clientes com base nos dados apresentado, mas tudo depende da estratégia da área de nogócio.
+Assim é importante apresentar os dados, mostrar os indicadores e perguntar a área de negócio qual a melhor estrátegia para avaliar o perfil de plientes da empresa. Se temos a ideia de atrair novos clientes ou menter os cleintes Recorrentes.
+
+Todos os Gráficos são interativos, podendo ser alterado pelo Segmento de Clientes específica para obter análises mais detalhadas.
