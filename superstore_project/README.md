@@ -853,3 +853,7 @@ Todos os Gráficos são interativos, podendo ser alterado pelo nome da Cidade es
 - 🔍 O Modo de Envio Standard Class teve uma crescente no decorre dos anos em relação ao outros Modos de Envio e ao seu proprio desempenho.
 
 Todos os Gráficos são interativos, podendo ser alterado pelo Modo de Envio específica para obter análises mais detalhadas.
+
+### **Dashboard Desempenho dos Pedidos**
+
+![Dashboard Pedidos](./Dashboard_Pedidos.png)
