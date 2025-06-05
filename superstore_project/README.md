@@ -810,3 +810,22 @@ Todos os Gráficos são interativos, podendo ser alterado pelo nome de um produt
 ### **Dashboard Desempenho dos Produtos**
 
 ![Dashboard Produtos](./Dashboard_Produtos.png)
+
+---
+
+### 🖥️ **Dashboard 3: Desempenho por Região**
+**Objetivo:** Analisar desempenho das Vendas por Região  
+**Visualizações principais:**
+- 🍕 Gráfico de Pizza: Mostrando a receita Total por Região
+- 🗺️ Mapa: Mostrando um Mapa com a Receita Total
+- 📋 Tabela: Mostra as 10 Cidade com a maior receita de Vendas
+- 🏷️ Cartões KPIs:
+    -  Estado com Maior Receita: California
+    -  Estado com Menor Receita: North Dakota
+
+**Principais Análises:**
+- 🔍 Região **Oeste** (West): Foi a região que apresentou a mairo Receita de Vendas, seguidas pelas regiões **Central** e **Leste** respectivamente.
+- 🔍 A Cidade que apresentou maior Receita foi a cidade de **Houston**, seguida pela cidade de **New York** e **Los Angeles**.
+- 🔍 O Estado com maior Receita foi o estado da **California** e o com Menor foi o eswtado de **North Dakota**
+
+Todos os Gráficos são interativos, podendo ser alterado pelo nome da Cidade específica para obter análises mais detalhadas.
