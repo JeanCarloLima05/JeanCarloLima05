@@ -885,3 +885,31 @@ Todos os Gráficos são interativos, podendo ser alterado pelo Segmento de Clien
 ### **Dashboard Desempenho dos Clientes**
 
 ![Dashboard Clientes](./Dashboard_Clientes.png)
+
+---
+
+## 🎯 Conclusão e Considerações Finais
+
+### 📌 Resultados Alcançados
+Através deste projeto, foi possível:
+
+✅ **Responder todas as perguntas de negócio** definidas inicialmente, transformando dados brutos em insights acionáveis através de dashboards interativos.  
+✅ **Aplicar na prática** conhecimentos essenciais de análise de dados:
+   - Transformação de dados com **Power Query**
+   - Modelagem dimensional com **esquema estrela**
+   - Criação de medidas avançadas com **DAX**
+   - Design de visualizações eficientes
+
+### 🛠️ Ferramentas Utilizadas
+O projeto foi desenvolvido integralmente no **Power BI Desktop**, demonstrando:
+- Capacidade de realizar **ETL completo** na ferramenta
+- Criação de **relacionamentos complexos**
+- Desenvolvimento de **calculações personalizadas**
+
+### 🌟 Considerações Finais
+Este projeto, desenvolvido com **dados públicos para fins educacionais**, serviu como:
+- Laboratório para **consolidar conhecimentos** em Power BI
+- Demonstração de **capacidade analítica** desde a limpeza até a visualização
+- Base para futuras **implementações em cenários reais**
+
+> "Os dados contam histórias quando questionados corretamente. Este projeto foi meu primeiro capítulo nessa narrativa." *(Jean Carlo)*
