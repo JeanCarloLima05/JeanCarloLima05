@@ -706,3 +706,52 @@ Seguem os dados gerados pelas consultas, em formato csv
 
 - Média de turmas por Região
 [Download dos resultados](./dados/resultado_analise1.csv)
+
+## 3 - Quantas escolas têm saneamento básico completo (água + esgoto + energia)?
+
+### 📌 Objetivo da Análise
+Identificar quantas escolas tem saneamento básico completo, ou seja, quantas escolas possuem água, rede de esgoto e energia elétrica.
+
+```sql
+ WITH 
+-- Total de escolas válidas (com informação nos 3 indicadores)
+total_escolas AS (
+    SELECT COUNT(*) AS total
+    FROM escolas_backup
+    WHERE IN_ENERGIA_REDE_PUBLICA IN (0, 1)
+      AND IN_AGUA_POTAVEL IN (0, 1)
+      AND IN_ESGOTO_REDE_PUBLICA IN (0, 1)
+),
+
+-- Escolas com saneamento completo (todos 3 serviços)
+com_saneamento AS (
+    SELECT COUNT(*) AS quantidade
+    FROM escolas_backup
+    WHERE IN_ENERGIA_REDE_PUBLICA = TRUE
+      AND IN_AGUA_POTAVEL = TRUE
+      AND IN_ESGOTO_REDE_PUBLICA = TRUE
+)
+-- Resultado final com números absolutos e porcentagem
+SELECT 
+    c.quantidade AS escolas_com_saneamento,
+    t.total AS total_escolas_validas,
+    ROUND((c.quantidade * 100.0 / t.total), 2) AS porcentagem
+FROM 
+    com_saneamento c,
+    total_escolas t;
+```
+**Métodos utilizados**
+- Uso de **CTEs** (Common Table Expressions) para Clareza na Lógica. Uma CTE calcula o total de escolas válidas, ou seja, quantidades de escolas que apresentão informação nas 3 categorias de saneamento listadas (não apresentando o valore ("-1")). A segunta CTE calcula a quantidade de escolas que possuem o saneamento completo, ou seja, escolas que possuem os três serviço (true).
+- Assim podemos então calcular a porcentagem de escolas que possuem saneamento básico completo em relação ao númeor de escolas total.
+- Usamos WITH ,para cria as CTEs, usamos também os comandos WHERE, COUNT, ROUND e a condicional AND. Além disso foi utilizado uma abrevição do nome das consultas do CTEs para falicitar na modelagem do código. (Ex: com_saneamnto = c e total_escolas = t)
+
+📋 **Retorno da consulta:**
+
+| Saneamento                 |
+|----------------------------|
+|103457	             |
+
+
+## 🔎 Principais Insights
+
+1. A Região **Centro-Oeste** apresenta a maior média da quantidades de turmas por escola, seguidas por **Sudeste**, **Sul**, **Nordeste** e **Norete**, respectivamente.
