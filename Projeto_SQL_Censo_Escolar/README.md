@@ -269,3 +269,39 @@ GROUP BY id, NO_REGIAO, NO_UF, NO_MUNICIPIO, NO_ENTIDADE, TP_DEPENDENCIA, TP_LOC
          QT_DOC_BAS, QT_TUR_BAS
 HAVING COUNT(*) > 1;
 ```
+O código conta o número de linhas repedidas na tabela (ou seja maior que 1)
+
+📋 **Retorno da consulta:**
+
+Nenhum resultado retornado. Retorno de lista vazia
+
+✅ Isso indica que **não há duplicatas** na tabela `escolas_2024`, considerando todas as colunas listadas no `GROUP BY`.
+
+### 🧩 Parte 2: Verificar Duplicatas de Nomes de Escolas
+
+Em seguida, vamos verificar se há **nomes de escolas repetidos** nos dados. Isso pode indicar inconsistências ou duplicações, como a mesma escola sendo registrada mais de uma vez.
+
+Utilizamos o seguinte comando SQL:
+
+```sql
+-- Verificar duplicatas nos nomes das escolas
+SELECT NO_ENTIDADE, COUNT(*) AS quantidade
+FROM escolas_backup
+GROUP BY id, NO_ENTIDADE
+HAVING COUNT(*) > 1;
+```
+O cófio conta quantas vezes o nome de cada escola (NO_ENTIDADE) aparece.
+Identifica se o mesmo nome aparece mais de uma vez no conjunto de dados.
+
+📋 **Retorno da consulta:**
+
+Nenhuma linha foi retornada, nenhum nome de escola repedido na base de dados.
+
+✅ **Conclusão da Verificação de Duplicatas**
+
+Após verificarmos todas as linhas da tabela e também analisarmos a variável `NO_ENTIDADE` (nome da escola), que é um dos principais indicadores de possíveis repetições:
+
+- **Não foram encontradas duplicatas completas** entre os registros.
+- **Não foram identificados nomes de escolas repetidos** com o mesmo `id`.
+
+📌 Com isso, concluímos que **não há valores ou linhas duplicadas** nos dados da tabela `escolas_2024`. Podemos seguir com segurança para a próxima etapa do tratamento dos dados.
