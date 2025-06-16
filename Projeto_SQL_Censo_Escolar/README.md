@@ -686,3 +686,23 @@ GROUP BY
 - WHERE - Filtra termo descrito (Nesse caso filtra os valores da quantidade de turmas para todos os valores validos, diferente de "-1", ou seja, não conta aquelas variaveis que não há informação).
 - GROUP BY - Agrupa os valores de media_turmas por Região.
 
+📋 **Retorno da consulta:**
+
+| Região                     | Média de Turmas |
+|----------------------------|-----------------------|
+|Centro-Oeste	             |       15.96           |
+|Nordeste                    |    10.60              |
+|Norte                       |    10.11              |
+|Sudeste                     |    14.05              |
+|Sul                         |    13.24              | 
+
+## 🔎 Principais Insights
+
+1. A Região **Centro-Oeste** apresenta a maior média da quantidades de turmas por escola, seguidas por **Sudeste**, **Sul**, **Nordeste** e **Norete**, respectivamente.
+2. Novamente notamos a disparidade da média quantidade de turmas por escola entre as Regiões **Sul/Centro-Oeste/Sudeste** em relação as regiões **Norte e Nordeste** evidente nos dados
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv
+
+- Média de turmas por Região
+[Download dos resultados](./dados/resultado_analise1.csv)
