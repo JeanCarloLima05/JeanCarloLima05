@@ -248,3 +248,24 @@ Por fim, faremos as queries para responder as perguntas de negócio, utilizando 
 CREATE TABLE escolas_backup AS
 SELECT * FROM escolas_2024;
 ```
+
+## 🧹 4️⃣ Limpeza e Transformação dos Dados
+
+Nesta etapa, após a importação bem-sucedida da tabela original e a criação de uma tabela de backup (`escolas_backup`) para tratarmos os dados com mais segurança, iniciamos o processo de limpeza e transformação.
+
+O primeiro passo é verificar a presença de **duplicatas** nos dados, garantindo que cada linha represente uma escola única e válida antes de prosseguirmos com os demais tratamentos (como nulos, formatação e consistência de dados).
+
+### 🧩 Parte 1: Verificar Duplicatas
+
+Primeiramente, vamos verificar se há **linhas duplicadas** em toda a base de dados. Para isso, utilizamos o seguinte código SQL:
+
+```sql
+-- Verificar duplicatas considerando todas as colunas da tabela
+SELECT *
+FROM escolas_backup
+GROUP BY id, NO_REGIAO, NO_UF, NO_MUNICIPIO, NO_ENTIDADE, TP_DEPENDENCIA, TP_LOCALIZACAO, 
+         IN_INTERNET, IN_ENERGIA_REDE_PUBLICA, IN_AGUA_POTAVEL, IN_ESGOTO_REDE_PUBLICA, 
+         IN_BANHEIRO, IN_QUADRA_ESPORTES, IN_REFEITORIO, IN_BIBLIOTECA, QT_MAT_BAS, 
+         QT_DOC_BAS, QT_TUR_BAS
+HAVING COUNT(*) > 1;
+```
