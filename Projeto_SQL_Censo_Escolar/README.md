@@ -820,3 +820,40 @@ Seguem os dados gerados pelas consultas, em formato csv
 
 ---
 
+## 4 - Qual o ranking dos 10 municípios com mais turmas?
+
+### 📌 Objetivo da Análise
+Identificar o ranking dos 10 municípios com a maior quantidade de turmas nas escolas.
+
+```sql
+SELECT NO_MUNICIPIO, SUM(QT_TUR_BAS) AS total_turmas
+FROM escolas_backup
+GROUP BY NO_MUNICIPIO
+ORDER BY total_turmas DESC
+LIMIT 10;
+```
+📋 **Retorno da consulta:**
+
+| Cidade         | Número de Turmas |
+|----------------|-----------------:|
+| São Paulo      |           121340 |
+| Rio de Janeiro |            54215 |
+| Brasília       |            28788 |
+| Fortaleza      |            23071 |
+| Salvador       |            22363 |
+| Belo Horizonte |            22328 |
+| Manaus         |            21094 |
+| Curitiba       |            16644 |
+| Recife         |            15089 |
+| Porto Alegre   |            13286 |
+
+## 🔎 Principais Insights
+
+1. **São Paulo** é o estado com maior número de turmas nas escolas com **121340** turmas, seguido de **Rio de Janeiro** e **Brasília**.
+2. Podemos notar uma diferença consideravel em relação o número de turmas da cidade de São Paulo em relação a outras cidades.
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv
+
+- Ranking das 10 cidades com maior números de turmas cadastradas
+[Download dos resultados](./dados/resultado_analise1.csv)
