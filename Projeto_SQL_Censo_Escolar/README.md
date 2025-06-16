@@ -344,3 +344,155 @@ FROM
 - Retorna o **número total de registros** da tabela.
 - Conta quantos registros possuem valores **nulos (`IS NULL`)** ou **vazios (`= ''`)** em cada coluna relevante.
 - Permite avaliar **quais campos precisam de tratamento de dados ausentes**.
+
+📋 **Retorno da consulta:**
+
+Notamos que varias colunas apresentaram valores nulos, alguns em grandes quantidades como mostra atabela abaixo:
+
+| Coluna                      | Valores Nulos/Vazios |
+|----------------------------|-----------------------|
+| total_registros            |       215545          |
+| id_nulos                   |    0                  |
+| NO_REGIAO_nulos            |    0                  |
+| NO_UF_nulos                |    0                  |
+| NO_MUNICIPIO_nulos         |    0                  |
+| NO_ENTIDADE_nulos          |    0                  |
+| TP_DEPENDENCIA_nulos       |    0                  |
+| TP_LOCALIZACAO_nulos       |    0                  |
+| IN_INTERNET_nulos          |    41138              |
+| IN_ENERGIA_REDE_PUBLICA_nulos |    40119           |
+| IN_AGUA_POTAVEL_nulos      |       110306          |
+| IN_ESGOTO_REDE_PUBLICA_nulos |    39405            |
+| IN_BANHEIRO_nulos          |       148976          |
+| IN_QUADRA_ESPORTES_nulos   |     145638            |
+| IN_REFEITORIO_nulos        |      118481           |
+| IN_BIBLIOTECA_nulos        |      48774            |
+| QT_MAT_BAS_nulos           |     36259             |
+| QT_DOC_BAS_nulos           |     36548             |
+| QT_TUR_BAS_nulos           |     36259             |
+
+## Tratamento de Valores Nulos
+
+A partir da consulta realizada notamos que há valores nulos nos registros, eles aparecem em grande quantidade, nas variáveis booleanas e nas variáveis quantitativas. 
+
+A melhor maneira para o tratamento desses valores primeiramente é verificar com a área de negócio as principais causas, como falta de informação na coleta, coleta errada entre outros. 
+
+Como em nosso caso, como se trata de um projeto de aprendizagem, vamos tomar as seguintes providências:
+
+## Parte 1 - Valores Booleanos
+
+Para os valores nulos encontrados em variáveis booleanas, decidimos que:
+
+- **Objetivo:** Preservar os dados originais e manter a coerência da análise
+- **Solução:** Os valores nulos serão convertidos para `-1`
+- **Justificativa:**  
+  O valor `-1` irá indicar claramente que não há informação sobre aquela variável, mantendo os valores booleanos originais (`0` e `1`) intactos
+
+**Representação:**
+- `1` = Verdadeiro/Sim
+- `0` = Falso/Não  
+- `-1` = Dado não disponível (anteriormente NULL)
+
+## 📋 Procedure para Verificação de Valores Nulos
+
+Primeiramente criaremos um procedure para verificar os valores nulos nas colunas. Isso vai ajudar a checar se as alterações que serão aplicadas funcionaram:
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE resumo_dados_nulos()
+BEGIN
+    SELECT 
+        COUNT(*) AS total_registros,
+        SUM(CASE WHEN id IS NULL OR id='' THEN 1 ELSE 0 END) AS id_nulos,
+        SUM(CASE WHEN NO_REGIAO IS NULL OR NO_REGIAO ='' THEN 1 ELSE 0 END) AS NO_REGIAO_nulos,
+        SUM(CASE WHEN NO_UF IS NULL OR NO_UF ='' THEN 1 ELSE 0 END) AS NO_UF_nulos,
+        SUM(CASE WHEN NO_MUNICIPIO IS NULL OR NO_MUNICIPIO ='' THEN 1 ELSE 0 END) AS NO_MUNICIPIO_nulos,
+        SUM(CASE WHEN NO_ENTIDADE IS NULL OR NO_ENTIDADE ='' THEN 1 ELSE 0 END) AS NO_ENTIDADE_nulos,
+        SUM(CASE WHEN TP_DEPENDENCIA IS NULL OR TP_DEPENDENCIA ='' THEN 1 ELSE 0 END) AS TP_DEPENDENCIA_nulos,
+        SUM(CASE WHEN TP_LOCALIZACAO IS NULL OR TP_LOCALIZACAO ='' THEN 1 ELSE 0 END) AS TP_LOCALIZACAO_nulos,
+        SUM(CASE WHEN IN_INTERNET IS NULL OR TRIM(IN_INTERNET) ='' THEN 1 ELSE 0 END) AS IN_INTERNET_nulos,
+        SUM(CASE WHEN IN_ENERGIA_REDE_PUBLICA IS NULL OR TRIM(IN_ENERGIA_REDE_PUBLICA) ='' THEN 1 ELSE 0 END) AS IN_ENERGIA_REDE_PUBLICA_nulos,
+        SUM(CASE WHEN IN_AGUA_POTAVEL IS NULL OR TRIM(IN_AGUA_POTAVEL) ='' THEN 1 ELSE 0 END) AS IN_AGUA_POTAVEL_nulos,
+        SUM(CASE WHEN IN_ESGOTO_REDE_PUBLICA IS NULL OR TRIM(IN_ESGOTO_REDE_PUBLICA) ='' THEN 1 ELSE 0 END) AS IN_ESGOTO_REDE_PUBLICA_nulos,
+        SUM(CASE WHEN IN_BANHEIRO IS NULL OR TRIM(IN_BANHEIRO) ='' THEN 1 ELSE 0 END) AS IN_BANHEIRO_nulos,
+        SUM(CASE WHEN IN_QUADRA_ESPORTES IS NULL OR TRIM(IN_QUADRA_ESPORTES) = '' THEN 1 ELSE 0 END) AS IN_QUADRA_ESPORTES_nulos,
+        SUM(CASE WHEN IN_REFEITORIO IS NULL OR TRIM(IN_REFEITORIO) ='' THEN 1 ELSE 0 END) AS IN_REFEITORIO_nulos,
+        SUM(CASE WHEN IN_BIBLIOTECA IS NULL OR TRIM(IN_BIBLIOTECA) ='' THEN 1 ELSE 0 END) AS IN_BIBLIOTECA_nulos,
+        SUM(CASE WHEN QT_MAT_BAS IS NULL OR QT_MAT_BAS ='' THEN 1 ELSE 0 END) AS QT_MAT_BAS_nulos,
+        SUM(CASE WHEN QT_DOC_BAS IS NULL OR QT_DOC_BAS ='' THEN 1 ELSE 0 END) AS QT_DOC_BAS_nulos,
+        SUM(CASE WHEN QT_TUR_BAS IS NULL OR QT_TUR_BAS ='' THEN 1 ELSE 0 END) AS QT_TUR_BAS_nulos
+    FROM 
+        escolas_backup;
+END $$
+
+DELIMITER ;
+```
+
+**Objetivo:**  
+Este procedure permite verificar a quantidade de valores nulos ou vazios em cada coluna da tabela `escolas_backup`, servindo como base para validar as transformações aplicadas nos dados.
+
+## 🔄 Substituição de Valores Nulos/Vazios por -1 em Variáveis Booleanas
+
+Agora iremos fazer a alteração dos valores nulos e vazios para `-1` nas variáveis booleanas:
+
+```sql
+-- Atualiza a tabela escolas_backup substituindo NULL/vazios por -1
+-- em todas as colunas de flags booleanas
+UPDATE escolas_backup
+SET 
+  IN_INTERNET = CASE 
+    WHEN IN_INTERNET IS NULL OR TRIM(IN_INTERNET) = '' THEN -1 
+    ELSE IN_INTERNET 
+  END,
+  
+  IN_ENERGIA_REDE_PUBLICA = CASE 
+    WHEN IN_ENERGIA_REDE_PUBLICA IS NULL OR TRIM(IN_ENERGIA_REDE_PUBLICA) = '' THEN -1 
+    ELSE IN_ENERGIA_REDE_PUBLICA 
+  END,
+  
+  IN_AGUA_POTAVEL = CASE 
+    WHEN IN_AGUA_POTAVEL IS NULL OR TRIM(IN_AGUA_POTAVEL) = '' THEN -1 
+    ELSE IN_AGUA_POTAVEL 
+  END,
+  
+  IN_ESGOTO_REDE_PUBLICA = CASE 
+    WHEN IN_ESGOTO_REDE_PUBLICA IS NULL OR TRIM(IN_ESGOTO_REDE_PUBLICA) = '' THEN -1 
+    ELSE IN_ESGOTO_REDE_PUBLICA 
+  END,
+  
+  IN_BANHEIRO = CASE 
+    WHEN IN_BANHEIRO IS NULL OR TRIM(IN_BANHEIRO) = '' THEN -1 
+    ELSE IN_BANHEIRO 
+  END,
+  
+  IN_QUADRA_ESPORTES = CASE 
+    WHEN IN_QUADRA_ESPORTES IS NULL OR TRIM(IN_QUADRA_ESPORTES) = '' THEN -1 
+    ELSE IN_QUADRA_ESPORTES 
+  END,
+  
+  IN_REFEITORIO = CASE 
+    WHEN IN_REFEITORIO IS NULL OR TRIM(IN_REFEITORIO) = '' THEN -1 
+    ELSE IN_REFEITORIO 
+  END,
+  
+  IN_BIBLIOTECA = CASE 
+    WHEN IN_BIBLIOTECA IS NULL OR TRIM(IN_BIBLIOTECA) = '' THEN -1 
+    ELSE IN_BIBLIOTECA 
+  END;
+
+```
+
+**Legenda de Valores:**
+- `1` = Sim/Disponível
+- `0` = Não/Indisponível  
+- `-1` = Não informado (originalmente NULL ou vazio)
+- 
+**Métods utilizados**
+- UPDATE - Modifica registros existentes
+- CASE WHEN - Condicional para substituição seletiva
+- IS NULL - Verifica valores nulos
+- TRIM() - Remove espaços em branco
+- Operador OR - Combina condições
+  
+**Impacto:** Esta transformação preserva os dados originais enquanto marca claramente os registros com informações faltantes.
