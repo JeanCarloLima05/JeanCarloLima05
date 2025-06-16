@@ -134,3 +134,47 @@ Além dos dados principais das escolas, o pacote inclui:
 - Um arquivo `Dicionário de Dados` em CSV, que foi utilizado para criar o modelo da tabela a ser usada no projeto e auxiliar na análise das variáveis;
 - Um arquivo `Leia-me` em PDF, com instruções e detalhes técnicos sobre o conteúdo;
 - Outros arquivos CSV com informações complementares, que **não serão abordados neste projeto**, mas podem ser úteis para análises futuras.
+
+## ⚙️ Preparação dos Dados para Importação
+
+Após o download dos dados do INEP, iniciou-se o processo de importação no MySQL. Foram feitas várias tentativas de importar o arquivo CSV completo, que contém mais de **400 colunas**, porém sem sucesso.
+
+Foi constatado que seria inviável criar uma tabela no MySQL com **todas as colunas** da base original, tanto por limitações técnicas quanto pela **relevância das variáveis** para este projeto.
+
+Diante disso, decidiu-se criar um novo arquivo CSV contendo **apenas as colunas selecionadas** para análise, com base no modelo da tabela `escolas_2024` já criado no MySQL.
+
+Para isso, foi utilizado um código em **Python (pandas)** que lê o arquivo original e exporta um novo CSV contendo apenas os campos necessários, facilitando a importação e garantindo consistência com a estrutura da tabela.
+Ainda por problemas de compatibilidade foi preciso trasnformar o arquivo csv e txt, para leitura em python.
+
+```python
+import pandas as pd  # Importa a biblioteca pandas para manipulação de dados tabulares
+
+# Caminho do arquivo original (.txt) contendo os microdados do Censo Escolar 2024
+arquivo_origem = 'dados/microdados_ed_basica_2024.txt'
+
+# Lista com os nomes das colunas que serão utilizadas na análise
+colunas_desejadas = [
+    'NO_REGIAO', 'NO_UF', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'TP_DEPENDENCIA', 'TP_LOCALIZACAO',
+    'IN_INTERNET', 'IN_ENERGIA_REDE_PUBLICA',
+    'IN_AGUA_POTAVEL', 'IN_ESGOTO_REDE_PUBLICA', 'IN_BANHEIRO',
+    'IN_QUADRA_ESPORTES', 'IN_REFEITORIO', 'IN_BIBLIOTECA',
+    'QT_MAT_BAS', 'QT_DOC_BAS', 'QT_TUR_BAS'
+]
+
+# Lê o arquivo original, carregando apenas as colunas selecionadas
+df = pd.read_csv(
+    arquivo_origem,       # Caminho do arquivo original
+    sep=';',              # Separador utilizado no arquivo (ponto e vírgula)
+    encoding='latin1',    # Codificação dos caracteres para leitura correta
+    usecols=colunas_desejadas  # Filtra apenas as colunas desejadas
+)
+
+# Exporta o novo DataFrame para um arquivo CSV com as colunas filtradas
+df.to_csv(
+    'dados/escolas_2024_filtrado.csv',  # Caminho de saída genérico para o novo arquivo
+    sep=';',           # Utiliza ponto e vírgula como separador
+    index=False,       # Não inclui o índice do DataFrame como coluna no CSV
+    encoding='utf-8'   # Codificação apropriada para importação no MySQL
+)´´´
+
+
