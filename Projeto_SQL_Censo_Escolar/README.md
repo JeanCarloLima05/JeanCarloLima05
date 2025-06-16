@@ -891,3 +891,66 @@ Cada escola será categorizada pela **soma de infraestruturas presentes** (valor
 | 2               | 2 itens                  | Média         | 
 | 0-1             | 1 item ou nenhum         | Baixa         | 
 
+## Parte 1: Função de Classificação de Infraestrutura
+
+### 📌 Objetivo
+Criar uma função SQL para classificar automaticamente as escolas em:
+- **Alta** (3-4 itens)
+- **Média** (2 itens)
+- **Baixa** (0-1 item)
+
+```sql
+ DELIMITER $$
+
+CREATE FUNCTION classifica_infraestrutura(
+    banheiro BOOLEAN,
+    quadra BOOLEAN,
+    refeitorio BOOLEAN,
+    biblioteca BOOLEAN
+)
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+    DECLARE total INT;
+    SET total = banheiro + quadra + refeitorio + biblioteca;
+
+    IF total >= 3 THEN
+        RETURN 'Alta';
+    ELSEIF total = 2 THEN
+        RETURN 'Média';
+    ELSE
+        RETURN 'Baixa';
+    END IF;
+END $$
+
+DELIMITER ;
+```
+Em seguida podemos checar se a função está correta: 
+
+```sql
+-- Chamando a função passando as colunas dos itens avaliados
+SELECT 
+  NO_ENTIDADE,
+  classifica_infraestrutura(IN_BANHEIRO, IN_QUADRA_ESPORTES, IN_REFEITORIO, IN_BIBLIOTECA) AS nivel_infra
+FROM escolas_backup;
+```
+## Parte 2: Criando um VIEW
+
+### 📌 Objetivo
+Criar um VIEW para facilitar a chamada da função, separando por Escolas, Estados, Municípios e Região: 
+
+```sql
+CREATE OR REPLACE VIEW vw_infra_escolas AS
+SELECT 
+  NO_ENTIDADE,
+  NO_MUNICIPIO,
+  NO_UF,
+  NO_REGIAO,
+  classifica_infraestrutura(
+    IN_BANHEIRO,
+    IN_QUADRA_ESPORTES,
+    IN_REFEITORIO,
+    IN_BIBLIOTECA
+  ) AS nivel_infra
+FROM escolas_backup;
+``` 
