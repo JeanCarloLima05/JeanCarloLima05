@@ -496,3 +496,22 @@ SET
 - Operador OR - Combina condições
   
 **Impacto:** Esta transformação preserva os dados originais enquanto marca claramente os registros com informações faltantes.
+
+## ✅ Verificação das Alterações
+
+Após a aplicação do código de substituição de valores nulos, podemos verificar o sucesso das alterações utilizando:
+
+```sql
+-- Chama o procedure para verificar a quantidade de valores nulos restantes
+CALL resumo_dados_nulos();
+
+-- Visualiza uma amostra dos dados com as alterações aplicadas
+SELECT * FROM escolas_backup LIMIT 10;
+```
+
+📋 **Retorno da consulta:**
+
+1. O procedure `resumo_dados_nulos()` retornou o valor `0` para valores nulos nas colunas booleanas, antes mostrando a quantidades de valores nulos.
+2. A consulta SELECT exibiu o valor `-1` nos campos onde anteriormente havia NULL/valores vazios.
+
+Assim os valores nulos e vazios das variaveis booleanas foram devidamente substituidos pelo valor '-1', que significa que não há informações para aquela escola. Com isso podemos seguir para a proxima etapa, que é modificar os valores nulos das variaveis quantitativas.
