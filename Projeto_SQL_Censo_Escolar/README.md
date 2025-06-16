@@ -44,3 +44,13 @@ Durante o desenvolvimento, diversas **questões estratégicas** foram elaboradas
 9. **Qual a distribuição percentual de escolas com água potável por região?**
 10. **Qual o Total de alunos por tipo de escola em cada estado?**
 
+---
+
+**🔔 Observação:**  
+Todas as perguntas, análises e interpretações realizadas são **fictícias** e têm como principal finalidade a **simulação de um cenário realista** para **fins de aprendizado e desenvolvimento de competências na área de análise de dados**.
+
+---
+
+## 🛠️ Processos de ELT e Modelagem dos Dados
+
+Este projeto foi práticamente desenvolvido no **MYSQL**, desde a importação e transformação dos dados até a criação de consultas. Todas as etapas foram cuidadosamente realizadas para garantir uma análise precisa e eficiente.
