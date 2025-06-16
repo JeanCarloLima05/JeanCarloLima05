@@ -234,6 +234,17 @@ QT_TUR_BAS = NULLIF(@QT_TUR_BAS, '');
 -- Atribui os valores das variáveis às colunas da tabela.
 -- Usa NULLIF para transformar strings vazias ('') em NULL no banco de dados.
 ```
+
 ---
 
-A
+Após a importação dos dados bem-sucedida, podemos verificar utilizando um `SELECT * FROM escolas_2024` e notar que a tabela foi importada com sucesso. 
+
+Agora, para começarmos a limpeza dos dados — verificando duplicatas e tratando valores nulos — criaremos uma cópia da tabela, na qual iremos realizar a limpeza. 
+
+Por fim, faremos as queries para responder as perguntas de negócio, utilizando a tabela chamada `escolas_backup`.
+
+```sql
+-- Criação de uma table de backup a partir da table original
+CREATE TABLE escolas_backup AS
+SELECT * FROM escolas_2024;
+```
