@@ -574,3 +574,88 @@ SELECT * FROM escolas_backup LIMIT 10;
 Assim os valores nulos e vazios das variaveis quantitativas foram devidamente substituidos pelo valor '-1', que significa que não há informações para aquela escola. Com isso resolvemos os problemas dos valores nulos em nossa base de dados. 
 
 Assim terminamos a etapa de Limpeza e trasnformação dos dados, podendo assim passa para etapa, onde começaremos a responder as perguntas de negocíso utilizando as consultas do SQL.
+
+---
+
+## 6️⃣ 📊 Respondendo Perguntas de Negócio
+
+Após realizar a **limpeza** e **transformação** dos dados, estamos prontos para responder às perguntas de negócio propostas. 
+
+### 🔍 Metodologia Adotada:
+- 📌 **1 query dedicada** para cada pergunta de negócio
+- 📂 **Organização em arquivos separados** na pasta do projeto
+- 📝 **Documentação clara** em cada script SQL
+
+## Quantas escolas têm acesso à internet por estado?
+
+### 📌 Objetivo da Análise
+Identificar a distribuição geográfica de escolas com infraestrutura digital básica.
+
+### 🔍 Métrica Principal
+- Contagem absoluta de escolas com `IN_INTERNET = 1` agrupadas por UF
+
+Além de obtermos informações sobre as escolas que tem acesso a internet por estado, também segue os código mostrando as escolas que não possuem acesso a internet por estado e as escolas que não há informações sobre o acesso de internet por estado.
+
+```sql
+# 1 - Quantas escolas têm internet por estado?
+ 
+ SELECT * FROM escolas_backup;
+ 
+ -- Escolas com acesso a internet por estado
+ SELECT NO_UF, COUNT(*) AS escolas_com_internet
+FROM escolas_backup
+WHERE IN_INTERNET = TRUE
+GROUP BY NO_UF;
+
+-- Escolas sem acesso a internet por estado
+ SELECT NO_UF, COUNT(*) AS escolas_sem_internet
+FROM escolas_backup
+WHERE IN_INTERNET = FALSE
+GROUP BY NO_UF;
+
+-- Escolas sem informações sobre acesso a internet por estado
+SELECT NO_UF, COUNT(*) AS escolas_sem_informacao_internet
+FROM escolas_backup
+WHERE IN_INTERNET = -1
+GROUP BY NO_UF;
+```
+
+**Legenda de Valores:**
+- `TRUE` = Sim/Disponível
+- `FALSE` = Não/Indisponível  
+- `-1` = Não informado
+
+
+Ainda podemos verificar quais estados têm maior porporção de escolas com internet
+
+```sql
+# Quais estados têm maior proporção de escolas com internet?
+ SELECT 
+  NO_REGIAO, NO_UF AS Estado,
+  ROUND(SUM(CASE WHEN IN_INTERNET = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100, 2) AS perc_com_internet
+FROM 
+  escolas_backup
+GROUP BY 
+ NO_REGIAO, NO_UF
+ORDER BY 
+  perc_com_internet DESC;
+```
+
+📋 **Retorno da consulta:**
+
+## 🔎 Principais Insights
+1. **Distrito Federal** lidera a maior porcentagem de escolas com acesso a internet com **'97,43%'**, seguida do **Parána** e **Goiás**
+2. 7 estados concentram 70% das escolas conectadas
+3. Disparidade Norte-Sul evidente nos dados
+
+## 📁 Dados Completos
+- Escolas com acesso a internet por estado
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Escolas sem acesso a internet por estado
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Escolas sem informações sobre acesso a internet por estado
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Quais estados têm maior proporção de escolas com internet?
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+> ℹ️ **Metodologia**: Foram consideradas apenas escolas com `IN_INTERNET = 1`. Dados não informados (`-1`) foram excluídos da análise.
