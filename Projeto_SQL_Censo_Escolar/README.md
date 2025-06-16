@@ -820,36 +820,39 @@ Seguem os dados gerados pelas consultas, em formato csv
 
 ---
 
-## 4 - Qual o ranking dos 10 municípios com mais turmas?
+## 5 - Qual o ranking dos 10 municípios com mais turmas?
 
 ### 📌 Objetivo da Análise
-Identificar o ranking dos 10 municípios com a maior quantidade de turmas nas escolas.
+Identificar o ranking dos 10 municípios com a maior quantidade de turmas nas escolas. Lembrando que queremos apenas a quantidade de turmas válidas, ou seja, apenas valores que são diferentes de "-1".
 
 ```sql
-SELECT NO_MUNICIPIO, SUM(QT_TUR_BAS) AS total_turmas
+SELECT 
+ NO_MUNICIPIO AS Municipios, 
+ SUM(QT_TUR_BAS) AS total_turmas_validas
 FROM escolas_backup
+WHERE QT_TUR_BAS != -1 -- Filtra apenas valores válidos (diferentes de -1)
 GROUP BY NO_MUNICIPIO
-ORDER BY total_turmas DESC
+ORDER BY total_turmas_validas DESC
 LIMIT 10;
 ```
 📋 **Retorno da consulta:**
 
-| Cidade         | Número de Turmas |
+| Município      | Número de Turmas |
 |----------------|-----------------:|
-| São Paulo      |           121340 |
-| Rio de Janeiro |            54215 |
-| Brasília       |            28788 |
-| Fortaleza      |            23071 |
-| Salvador       |            22363 |
-| Belo Horizonte |            22328 |
-| Manaus         |            21094 |
-| Curitiba       |            16644 |
-| Recife         |            15089 |
-| Porto Alegre   |            13286 |
+| São Paulo      |           122126 |
+| Rio de Janeiro |            54435 |
+| Brasília       |            28864 |
+| Fortaleza      |            23131 |
+| Belo Horizonte |            23104 |
+| Salvador       |            22434 |
+| Manaus         |            21142 |
+| Curitiba       |            16759 |
+| Recife         |            15288 |
+| Porto Alegre   |            13358 |
 
 ## 🔎 Principais Insights
 
-1. **São Paulo** é o estado com maior número de turmas nas escolas com **121340** turmas, seguido de **Rio de Janeiro** e **Brasília**.
+1. **São Paulo** é o estado com maior número de turmas nas escolas com **122126** turmas, seguido de **Rio de Janeiro** e **Brasília**.
 2. Podemos notar uma diferença consideravel em relação o número de turmas da cidade de São Paulo em relação a outras cidades.
 
 ## 📁 Dados Completos
@@ -857,3 +860,34 @@ Seguem os dados gerados pelas consultas, em formato csv
 
 - Ranking das 10 cidades com maior números de turmas cadastradas
 [Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
+## 6 - Quais as escolas tem a melhor infraestrutura (banheiro, quadra esportiva, refeitorio e bibliotecas) por Cidades/Etados/Região?
+
+## 📌 Objetivo da Análise
+
+Identificar escolas com **melhor infraestrutura** baseada em variáveis booleanas (`1` = possui, `0` = não possui):
+- `IN_BANHEIRO` (Banheiro)
+- `IN_QUADRA_ESPORTES` (Quadra esportiva)
+- `IN_REFEITORIO` (Refeitório)
+- `IN_BIBLIOTECA` (Biblioteca)
+
+### 📋 Método de Classificação
+Cada escola será categorizada pela **soma de infraestruturas presentes** (valores `1`):
+| Variável Booleana         | Descrição               | Valores Válidos |
+|---------------------------|-------------------------|-----------------|
+| `IN_BANHEIRO`             | Presença de banheiro    | 1 = Sim, 0 = Não |
+| `IN_QUADRA_ESPORTES`      | Presença de quadra      | 1 = Sim, 0 = Não |
+| `IN_REFEITORIO`           | Presença de refeitório  | 1 = Sim, 0 = Não |
+| `IN_BIBLIOTECA`           | Presença de biblioteca  | 1 = Sim, 0 = Não |
+
+### Tabela de Classificação de Infraestrutura
+
+| Pontuação Total | Itens Presentes          | Classificação |
+|-----------------|--------------------------|---------------|
+| 4               | Todos os 4 itens         | Alta          | 
+| 3               | 3 itens                  | Alta          |
+| 2               | 2 itens                  | Média         | 
+| 0-1             | 1 item ou nenhum         | Baixa         | 
+
