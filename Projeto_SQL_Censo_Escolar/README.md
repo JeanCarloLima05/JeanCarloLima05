@@ -548,7 +548,7 @@ SET
   END;
 ```
 
-**Métods utilizados**
+**Métodos utilizados**
 - UPDATE - Modifica registros existentes
 - CASE WHEN - Condicional para substituição seletiva
 - IS NULL - Verifica valores nulos
@@ -586,7 +586,7 @@ Após realizar a **limpeza** e **transformação** dos dados, estamos prontos pa
 - 📂 **Organização em arquivos separados** na pasta do projeto
 - 📝 **Documentação clara** em cada script SQL
 
-## Quantas escolas têm acesso à internet por estado?
+## 1 - Quantas escolas têm acesso à internet por estado?
 
 ### 📌 Objetivo da Análise
 Identificar a distribuição geográfica de escolas com infraestrutura digital básica.
@@ -605,19 +605,22 @@ Além de obtermos informações sobre as escolas que tem acesso a internet por e
  SELECT NO_UF, COUNT(*) AS escolas_com_internet
 FROM escolas_backup
 WHERE IN_INTERNET = TRUE
-GROUP BY NO_UF;
+GROUP BY NO_UF
+ORDER BY escolas_com_internet DESC;
 
 -- Escolas sem acesso a internet por estado
  SELECT NO_UF, COUNT(*) AS escolas_sem_internet
 FROM escolas_backup
 WHERE IN_INTERNET = FALSE
-GROUP BY NO_UF;
+GROUP BY NO_UF
+ORDER BY escolas_sem_internet DESC;
 
 -- Escolas sem informações sobre acesso a internet por estado
 SELECT NO_UF, COUNT(*) AS escolas_sem_informacao_internet
 FROM escolas_backup
 WHERE IN_INTERNET = -1
-GROUP BY NO_UF;
+GROUP BY NO_UF
+ORDER BY escolas_sem_informacao_internet DESC;
 ```
 
 **Legenda de Valores:**
@@ -626,7 +629,7 @@ GROUP BY NO_UF;
 - `-1` = Não informado
 
 
-Ainda podemos verificar quais estados têm maior porporção de escolas com internet
+Ainda podemos verificar quais estados têm maior proporção de escolas com internet em relação ao número de escolas por estado.
 
 ```sql
 # Quais estados têm maior proporção de escolas com internet?
@@ -644,11 +647,14 @@ ORDER BY
 📋 **Retorno da consulta:**
 
 ## 🔎 Principais Insights
-1. **Distrito Federal** lidera a maior porcentagem de escolas com acesso a internet com **'97,43%'**, seguida do **Parána** e **Goiás**
-2. 7 estados concentram 70% das escolas conectadas
-3. Disparidade Norte-Sul evidente nos dados
+1. **São Paulo** é o estado com o maior número de escolas com acesso a interne, sendo **30614** escolas, seguido por **Minas Gerais** e **Bahia**.
+2. **Pará** é o estado com maior número de escolas **SEM** acesso a internet, sendo **1949** escolas, seguido pelo **Maranhão** e **Bahia**
+3. **Distrito Federal** lidera a maior proporção de escolas com acesso a internet com **97,43%**, seguida do **Paraná** e **Goiás**
+4. Disparidade entre as escolas com acesso a internet na região **Sul/Centro-Oeste/Sudeste** em relação as regiões **Norte e Nordeste** evidente nos dados.
 
 ## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv
+
 - Escolas com acesso a internet por estado
 [Download dos resultados](./dados/resultado_analise1.csv)
 - Escolas sem acesso a internet por estado
@@ -658,4 +664,25 @@ ORDER BY
 - Quais estados têm maior proporção de escolas com internet?
 [Download dos resultados](./dados/resultado_analise1.csv)
 
-> ℹ️ **Metodologia**: Foram consideradas apenas escolas com `IN_INTERNET = 1`. Dados não informados (`-1`) foram excluídos da análise.
+## 2 - Qual a média de turmas por escola em cada região?
+
+### 📌 Objetivo da Análise
+Identificar a média da quantidade de turmas registradas na educação básica por região.
+
+```sql
+SELECT 
+  NO_REGIAO AS Regiao,
+  ROUND(AVG(QT_TUR_BAS), 2) AS media_turmas
+FROM 
+  escolas_backup
+WHERE 
+  QT_TUR_BAS != -1
+GROUP BY 
+  NO_REGIAO;
+```
+**Métodos utilizados**
+- ROUND - Arredonda o valore da variave, para quantidade de casas decimais informada (nesse caso 2 casa decimais)
+- AVG - Retorna a Média dos valores 
+- WHERE - Filtra termo descrito (Nesse caso filtra os valores da quantidade de turmas para todos os valores validos, diferente de "-1", ou seja, não conta aquelas variaveis que não há informação).
+- GROUP BY - Agrupa os valores de media_turmas por Região.
+
