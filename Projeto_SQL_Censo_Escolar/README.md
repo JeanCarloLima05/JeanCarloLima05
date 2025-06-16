@@ -290,7 +290,7 @@ FROM escolas_backup
 GROUP BY id, NO_ENTIDADE
 HAVING COUNT(*) > 1;
 ```
-O cófio conta quantas vezes o nome de cada escola (NO_ENTIDADE) aparece.
+O código conta quantas vezes o nome de cada escola (NO_ENTIDADE) aparece.
 Identifica se o mesmo nome aparece mais de uma vez no conjunto de dados.
 
 📋 **Retorno da consulta:**
