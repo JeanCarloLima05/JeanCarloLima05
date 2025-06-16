@@ -69,4 +69,68 @@ USE Censo_Escolar_2024;
 
 -- Verificação de criação bem-sucedida
 SELECT DATABASE() AS Banco_Atual;
+```
+---
 
+## 🏗️ 2️⃣ Criação da Tabela `escolas_2024`
+
+## 📊 Estrutura da Tabela `escolas_2024`
+
+### 🗂️ Campos Principais
+
+| Campo            | Tipo          | Descrição                               | Valores/Referência                 | Métrica               |
+|------------------|---------------|-----------------------------------------|------------------------------------|------------------------|
+| **`id`**         | `INT`         | Chave primária auto-incrementada        | -                                  | Identificador único    |
+| **`NO_REGIAO`**  | `VARCHAR(20)` | Região geográfica do Brasil             | Norte, Nordeste, Centro-Oeste, Sudeste, Sul | Localização     |
+| **`NO_UF`**      | `VARCHAR(50)` | Unidade Federativa (Estado)             | SP, RJ, MG, etc.                   | Análise regional       |
+| **`NO_MUNICIPIO`** | `VARCHAR(100)` | Município onde a escola está localizada | -                                  | Dados locais           |
+| **`NO_ENTIDADE`** | `VARCHAR(100)` | Nome oficial da instituição de ensino   | -                                  | Identificação          |
+
+---
+
+### 🔑 Campos de Classificação
+
+| Campo              | Tipo  | Descrição                 | Valores Válidos                                         | Análise                  |
+|--------------------|-------|---------------------------|----------------------------------------------------------|--------------------------|
+| **`TP_DEPENDENCIA`** | `INT` | Dependência administrativa | `1` = Federal  <br> `2` = Estadual <br> `3` = Municipal <br> `4` = Privada | Comparação público/privado |
+| **`TP_LOCALIZACAO`** | `INT` | Localização geográfica     | `1` = Urbana <br> `2` = Rural                            | Acesso à infraestrutura  |
+
+---
+
+### 🏗️ Campos de Infraestrutura (Booleanos)
+
+| Campo                      | Tipo      | Descrição                     | Impacto                |
+|----------------------------|-----------|-------------------------------|------------------------|
+| **`IN_INTERNET`**          | `BOOLEAN` | Acesso à internet             | `0` = Não <br> `1` = Sim | Conectividade           |
+| **`IN_ENERGIA_REDE_PUBLICA`** | `BOOLEAN` | Energia da rede pública        | `0` = Não <br> `1` = Sim | Infraestrutura básica   |
+| **`IN_AGUA_POTAVEL`**      | `BOOLEAN` | Água potável disponível       | `0` = Não <br> `1` = Sim | Saneamento              |
+| **`IN_ESGOTO_REDE_PUBLICA`** | `BOOLEAN` | Esgoto da rede pública         | `0` = Não <br> `1` = Sim | Condições sanitárias    |
+| **`IN_BANHEIRO`**          | `BOOLEAN` | Banheiro disponível           | `0` = Não <br> `1` = Sim | Infraestrutura básica   |
+
+---
+
+### 📚 Campos Educacionais
+
+| Campo           | Tipo | Descrição                         | 
+|-----------------|------|-----------------------------------|
+| **`QT_MAT_BAS`**| `INT`| Quantidade de Matrículas na Educação Básica   | 
+| **`QT_DOC_BAS`**| `INT`| Quantidade de Docentes na Educação Básica     |
+| **`QT_TUR_BAS`**| `INT`| Quantidade de Turmas na Educação Básica       | 
+
+**🔔 Observações:**
+
+- Todos os campos apresentados pertencem à **mesma tabela**, chamada `escolas_2024`.
+- A tabela original do INEP contém **mais de 400 colunas**; para este projeto, foram selecionadas **apenas as variáveis relevantes** para responder às perguntas de negócio.
+- A estrutura da tabela foi criada com base no **dicionário de dados oficial** fornecido junto ao dataset do Censo Escolar 2024, disponível no site do INEP.
+
+---
+
+## 📥 3️⃣ Importação dos Dados
+
+Os dados utilizados neste projeto foram baixados do site do INEP em um arquivo `.zip`, que contém os microdados do **Censo Escolar da Educação Básica 2024** em formato CSV.
+
+Além dos dados principais das escolas, o pacote inclui:
+- Um Arquivo CSV 'microdados_ed_basica_2024', que foi o arquivo principal utilizado nesse projeto.
+- Um arquivo `Dicionário de Dados` em CSV, que foi utilizado para criar o modelo da tabela a ser usada no projeto e auxiliar na análise das variáveis;
+- Um arquivo `Leia-me` em PDF, com instruções e detalhes técnicos sobre o conteúdo;
+- Outros arquivos CSV com informações complementares, que **não serão abordados neste projeto**, mas podem ser úteis para análises futuras.
