@@ -515,3 +515,62 @@ SELECT * FROM escolas_backup LIMIT 10;
 2. A consulta SELECT exibiu o valor `-1` nos campos onde anteriormente havia NULL/valores vazios.
 
 Assim os valores nulos e vazios das variaveis booleanas foram devidamente substituidos pelo valor '-1', que significa que não há informações para aquela escola. Com isso podemos seguir para a proxima etapa, que é modificar os valores nulos das variaveis quantitativas.
+
+## Parte 2 - Valores Quantitativos
+
+Para os valores nulos encontrados em variáveis quantitativas, iremos utilizar a mesma abordagem anterior, decidimos que:
+
+- **Objetivo:** Preservar os dados originais e manter a coerência da análise
+- **Solução:** Os valores nulos serão convertidos para `-1`
+- **Justificativa:**  
+  O valor `-1` irá indicar claramente que não há informação sobre aquela variável, mantendo os valores quantitativos originais  intactos
+
+## 🔄 Substituição de Valores Nulos/Vazios por -1 em Variáveis Quantitativas
+
+Agora iremos fazer a alteração dos valores nulos e vazios para `-1` nas variáveis quantitativas, o bjetivo mantendo em preservar a fonte de dados original, e atribuir aos valores nulos "-1", como forma de destacar que não há informações sobre a escola a respeito das variaveis quantitativas:
+
+```sql
+UPDATE escolas_backup
+SET 
+  QT_MAT_BAS = CASE
+    WHEN QT_MAT_BAS IS NULL OR QT_MAT_BAS = '' THEN -1
+    ELSE QT_MAT_BAS
+  END,
+
+  QT_DOC_BAS = CASE
+    WHEN QT_DOC_BAS IS NULL OR QT_DOC_BAS = '' THEN -1
+    ELSE QT_DOC_BAS
+  END,
+  
+  QT_TUR_BAS = CASE
+    WHEN QT_TUR_BAS IS NULL OR QT_TUR_BAS = '' THEN -1
+    ELSE QT_TUR_BAS
+  END;
+```
+
+**Métods utilizados**
+- UPDATE - Modifica registros existentes
+- CASE WHEN - Condicional para substituição seletiva
+- IS NULL - Verifica valores nulos
+- Operador OR - Combina condições
+
+## ✅ Verificação das Alterações
+
+Após a aplicação do código de substituição de valores nulos, podemos verificar o sucesso das alterações utilizando:
+
+```sql
+-- Chama o procedure para verificar a quantidade de valores nulos restantes
+CALL resumo_dados_nulos();
+
+-- Visualiza uma amostra dos dados com as alterações aplicadas
+SELECT * FROM escolas_backup LIMIT 10;
+```
+
+📋 **Retorno da consulta:**
+
+1. O procedure `resumo_dados_nulos()` retornou o valor `0` para valores nulos nas colunas quantitativas, antes mostrando a quantidades de valores nulos.
+2. A consulta SELECT exibiu o valor `-1` nos campos onde anteriormente havia NULL/valores vazios.
+
+Assim os valores nulos e vazios das variaveis quantitativas foram devidamente substituidos pelo valor '-1', que significa que não há informações para aquela escola. Com isso resolvemos os problemas dos valores nulos em nossa base de dados. 
+
+Assim terminamos a etapa de Limpeza e trasnformação dos dados, podendo assim passa para etapa, onde começaremos a responder as perguntas de negocíso utilizando as consultas do SQL.
