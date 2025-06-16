@@ -27,3 +27,20 @@ O projeto responde a **10 perguntas de negócio** através de consultas SQL, sim
 - **Identificar padrões** na infraestrutura escolar brasileira
 - **Gerar insights** para possíveis melhorias no sistema educacional
 
+---
+
+## ❓ Perguntas de Negócio que Guiaram a Análise
+
+Durante o desenvolvimento, diversas **questões estratégicas** foram elaboradas para nortear a exploração dos dados:
+
+1. **Quantas escolas têm internet por estado?**  
+2. **Qual a média de turmas por escola em cada região?**  
+3. **Quantas escolas têm saneamento básico completo (água + esgoto + energia)?**  
+4. **Qual a distribuição de escolas públicas x privadas por estado?**  
+5. **Qual o ranking dos 10 municípios com mais turmas?**
+6. **Quais as escolas tem a melhor infraestrutura (banheiro, quadra esportiva, refeitorio e bibliotecas) por Cidades/Etados/Região?**
+7. **Quantas escolas de cada nível de infraestrutura existem em uma determinada região e tipo de rede administrativa?**
+8. **Qual é o número médio de docentes, matriculas e turmas por escola em municípios com mais de 100 escolas?**
+9. **Qual a distribuição percentual de escolas com água potável por região?**
+10. **Qual o Total de alunos por tipo de escola em cada estado?**
+
