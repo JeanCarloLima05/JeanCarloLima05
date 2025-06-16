@@ -175,6 +175,65 @@ df.to_csv(
     sep=';',           # Utiliza ponto e vírgula como separador
     index=False,       # Não inclui o índice do DataFrame como coluna no CSV
     encoding='utf-8'   # Codificação apropriada para importação no MySQL
-)´´´
+)
+```
 
+## 💾 Importação dos Dados no MySQL
 
+Com o arquivo CSV filtrado contendo apenas as colunas relevantes, foi possível realizar a importação para o MySQL utilizando o comando `LOAD DATA INFILE`.
+
+Abaixo está o script SQL utilizado para carregar os dados do arquivo `escolas_2024_filtrado.csv` na tabela `escolas_2024`
+
+```sql
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/escolas_2024_filtrado.csv'
+-- Carrega os dados do arquivo CSV localizado no caminho especificado.
+
+INTO TABLE escolas_2024
+-- Indica que os dados serão importados para a tabela 'escolas_2024'.
+
+CHARACTER SET utf8mb4
+-- Define o conjunto de caracteres do arquivo para utf8mb4 (suporte completo a Unicode).
+
+FIELDS TERMINATED BY ';'
+-- Especifica que os campos no arquivo CSV são separados por ponto e vírgula.
+
+ENCLOSED BY '"'
+-- Indica que os valores estão entre aspas duplas.
+
+LINES TERMINATED BY '\r\n'
+-- Define que cada linha termina com o caractere de retorno de carro + nova linha (formato Windows).
+
+IGNORE 1 LINES
+-- Ignora a primeira linha do arquivo, geralmente usada para pular o cabeçalho com nomes das colunas.
+
+(
+	@NO_REGIAO, @NO_UF, @NO_MUNICIPIO, @NO_ENTIDADE, @TP_DEPENDENCIA, @TP_LOCALIZACAO, @IN_INTERNET, @IN_ENERGIA_REDE_PUBLICA, 
+    @IN_AGUA_POTAVEL, @IN_ESGOTO_REDE_PUBLICA, @IN_BANHEIRO, @IN_QUADRA_ESPORTES, @IN_REFEITORIO,         
+	@IN_BIBLIOTECA, @QT_MAT_BAS, @QT_DOC_BAS, @QT_TUR_BAS
+)
+-- Define variáveis temporárias para receber os dados de cada coluna do arquivo.
+
+SET
+NO_REGIAO = NULLIF(@NO_REGIAO, ''),
+NO_UF = NULLIF(@NO_UF, ''),
+NO_MUNICIPIO = NULLIF(@NO_MUNICIPIO, ''),
+NO_ENTIDADE = NULLIF(@NO_ENTIDADE, ''),
+TP_DEPENDENCIA = NULLIF(@TP_DEPENDENCIA, ''), 
+TP_LOCALIZACAO = NULLIF(@TP_LOCALIZACAO, ''),  
+IN_INTERNET = NULLIF(@IN_INTERNET, ''),
+IN_ENERGIA_REDE_PUBLICA = NULLIF(@IN_ENERGIA_REDE_PUBLICA, ''),
+IN_AGUA_POTAVEL = NULLIF(@IN_AGUA_POTAVEL, ''),
+IN_ESGOTO_REDE_PUBLICA = NULLIF(@IN_ESGOTO_REDE_PUBLICA, ''),
+IN_BANHEIRO = NULLIF(@IN_BANHEIRO, ''),
+IN_QUADRA_ESPORTES = NULLIF(@IN_QUADRA_ESPORTES, ''),
+IN_REFEITORIO = NULLIF(@IN_REFEITORIO, ''),
+IN_BIBLIOTECA = NULLIF(@IN_BIBLIOTECA, ''),
+QT_MAT_BAS = NULLIF(@QT_MAT_BAS, ''),
+QT_DOC_BAS = NULLIF(@QT_DOC_BAS, ''),
+QT_TUR_BAS = NULLIF(@QT_TUR_BAS, '');
+-- Atribui os valores das variáveis às colunas da tabela.
+-- Usa NULLIF para transformar strings vazias ('') em NULL no banco de dados.
+```
+---
+
+A
