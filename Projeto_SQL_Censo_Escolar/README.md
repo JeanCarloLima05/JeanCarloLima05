@@ -964,6 +964,17 @@ Criar a consulta para classificar a quantidade de escolas por diferentes tipos d
 Iremos filtrar pelos 20 Municipios, Estados e Região com a infraestrutura com o nível mais alto:
 
 ```sql
+#MUNICIPIOS, ESTADO E REGIÃO 
+SELECT 
+  NO_MUNICIPIO, NO_UF, NO_REGIAO,
+  COUNT(*) AS total_escolas,
+  SUM(nivel_infra = 'Alta') AS escolas_alta,
+  SUM(nivel_infra = 'Média') AS escolas_media,
+  SUM(nivel_infra = 'Baixa') AS escolas_baixa
+FROM vw_infra_escolas
+GROUP BY NO_MUNICIPIO, NO_UF, NO_REGIAO
+ORDER BY escolas_alta DESC LIMIT 20;
+
 #MUNICIPIOS
 SELECT 
   NO_MUNICIPIO,
@@ -998,6 +1009,7 @@ GROUP BY NO_REGIAO
 ORDER BY escolas_alta DESC;
 ```
 📋 **Retorno da consulta:**
+Tabela das escola para diferentes tipos de níveis de infraestrutura por municípios
 
 | Cidade         | Total Escolas | Infra. Alta | Infra. Média | Infra. Baixa |
 |----------------|--------------:|------------:|-------------:|-------------:|
@@ -1026,3 +1038,31 @@ ORDER BY escolas_alta DESC;
 - **Infra. Alta**: Escolas com 3-4 itens de infraestrutura
 - **Infra. Média**: Escolas com 2 itens de infraestrutura
 - **Infra. Baixa**: Escolas com 0-1 item de infraestrutura
+
+O código acima também mostra as consultas para Estado e Regiões, além de uma conuslta que filtra estados, municípios e regiões na mesma tabela, segue as consultas em csv na pasta do projeto.
+
+## 🔎 Principais Insights
+
+1. **São Paulo** é a cidade com maior número de escolas com infraestrutura **alta** com **2766** escolas, seguido de **Rio de Janeiro** e **Belo Horizonte**.
+2. Consequentemente **São Paulo** também é a cidade com maior número de escolas com infraestrutura **baixa** com **1515** escolas, seguido de **Salvador** e **Belo Horizonte**.
+3. A região **Sudeste** é a região com maior número de escolas com infraestrutura **alta** com **30577** escolas.
+4. A região **Nordeste** é a região com maior número de escolas com infraestrutura **baixa** com **43516** escolas. 
+5. Podemos notar uma diferença consideravel dos níveis da infraestrutura da escolas baseada na sua localização (Região, Estado e Municípios). 
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv
+
+- Escolas por nível de infreestrutura por Municípios, Estados e Região
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Escolas por nível de infreestrutura por Municípios
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Escolas por nível de infreestrutura por Estados 
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Escolas por nível de infreestrutura por Região
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
+## 6 - Qual é o número médio de docentes, matriculas e turmas por escola em municípios com mais de 100 escolas?
+
+## 📌 Objetivo da Análise
