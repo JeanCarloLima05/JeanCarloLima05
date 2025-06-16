@@ -1063,6 +1063,6 @@ Seguem os dados gerados pelas consultas, em formato csv
 
 ---
 
-## 6 - Qual é o número médio de docentes, matriculas e turmas por escola em municípios com mais de 100 escolas?
+## 7 - Quantas escolas de cada nível de infraestrutura existem em uma determinada região e o tipo de rede administrativa?
 
 ## 📌 Objetivo da Análise
