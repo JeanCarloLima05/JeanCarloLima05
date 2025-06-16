@@ -953,4 +953,76 @@ SELECT
     IN_BIBLIOTECA
   ) AS nivel_infra
 FROM escolas_backup;
+
+-- Para vizualizar a view e verificar se funciona
+SELECT * FROM vw_infra_escolas;
 ``` 
+## Parte 3: Quantidade de escolas por níveis de infraestrutura e localização
+
+### 📌 Objetivo
+Criar a consulta para classificar a quantidade de escolas por diferentes tipos de níveis de infraestrutura e por municípios, estado e região.
+Iremos filtrar pelos 20 Municipios, Estados e Região com a infraestrutura com o nível mais alto:
+
+```sql
+#MUNICIPIOS
+SELECT 
+  NO_MUNICIPIO,
+  COUNT(*) AS total_escolas,
+  SUM(nivel_infra = 'Alta') AS escolas_alta,
+  SUM(nivel_infra = 'Média') AS escolas_media,
+  SUM(nivel_infra = 'Baixa') AS escolas_baixa
+FROM vw_infra_escolas
+GROUP BY NO_MUNICIPIO, NO_UF
+ORDER BY escolas_alta DESC LIMIT 20;
+
+#ESTADOS
+SELECT 
+  NO_UF,
+  COUNT(*) AS total_escolas,
+  SUM(nivel_infra = 'Alta') AS escolas_alta,
+  SUM(nivel_infra = 'Média') AS escolas_media,
+  SUM(nivel_infra = 'Baixa') AS escolas_baixa
+FROM vw_infra_escolas
+GROUP BY NO_UF
+ORDER BY escolas_alta DESC;
+
+#REGIÃO 
+SELECT 
+  NO_REGIAO,
+  COUNT(*) AS total_escolas,
+  SUM(nivel_infra = 'Alta') AS escolas_alta,
+  SUM(nivel_infra = 'Média') AS escolas_media,
+  SUM(nivel_infra = 'Baixa') AS escolas_baixa
+FROM vw_infra_escolas
+GROUP BY NO_REGIAO
+ORDER BY escolas_alta DESC;
+```
+📋 **Retorno da consulta:**
+
+| Cidade         | Total Escolas | Infra. Alta | Infra. Média | Infra. Baixa |
+|----------------|--------------:|------------:|-------------:|-------------:|
+| São Paulo      | 8,023        | 2,766       | 3,742        | 1,515        |
+| Rio de Janeiro | 4,203        | 2,450       | 1,349        | 404          |
+| Belo Horizonte | 2,146        | 1,054       | 292          | 800          |
+| Fortaleza      | 1,348        | 829         | 353          | 166          |
+| Salvador       | 1,620        | 680         | 484          | 456          |
+| Manaus         | 1,107        | 674         | 308          | 125          |
+| Curitiba       | 1,210        | 642         | 418          | 150          |
+| Brasília       | 1,360        | 618         | 540          | 202          |
+| Porto Alegre   | 1,040        | 522         | 301          | 217          |
+| Recife         | 1,235        | 513         | 362          | 360          |
+| Goiânia        | 873          | 473         | 303          | 97           |
+| Campinas       | 741          | 378         | 243          | 120          |
+| Guarulhos      | 745          | 361         | 257          | 127          |
+| Belém          | 704          | 357         | 186          | 161          |
+| São Luís       | 829          | 357         | 245          | 227          |
+| Campo Grande   | 552          | 308         | 165          | 79           |
+| São Gonçalo    | 576          | 305         | 168          | 103          |
+| Duque de Caxias| 603          | 294         | 215          | 94           |
+| Natal          | 633          | 288         | 155          | 190          |
+| Uberlândia     | 434          | 275         | 86           | 73           |
+
+**Legenda:**
+- **Infra. Alta**: Escolas com 3-4 itens de infraestrutura
+- **Infra. Média**: Escolas com 2 itens de infraestrutura
+- **Infra. Baixa**: Escolas com 0-1 item de infraestrutura
