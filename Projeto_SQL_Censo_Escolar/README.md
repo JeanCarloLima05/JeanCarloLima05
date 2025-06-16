@@ -305,3 +305,42 @@ Após verificarmos todas as linhas da tabela e também analisarmos a variável `
 - **Não foram identificados nomes de escolas repetidos** com o mesmo `id`.
 
 📌 Com isso, concluímos que **não há valores ou linhas duplicadas** nos dados da tabela `escolas_2024`. Podemos seguir com segurança para a próxima etapa do tratamento dos dados.
+
+---
+
+5️⃣🔍 Verificação de Valores Nulos
+
+Após garantir que não há duplicatas na base de dados, o próximo passo é verificar a **presença de valores nulos ou vazios** nas colunas da tabela `escolas_2024`. Isso é essencial para definir estratégias de tratamento, como preenchimento, substituição por padrão ou exclusão de registros.
+
+A consulta abaixo identifica a **quantidade de valores nulos ou vazios (`''`)** em cada coluna da tabela:
+
+```sql
+SELECT 
+    COUNT(*) AS total_registros,
+    SUM(CASE WHEN id IS NULL OR id = '' THEN 1 ELSE 0 END) AS id_nulos,
+    SUM(CASE WHEN NO_REGIAO IS NULL OR NO_REGIAO = '' THEN 1 ELSE 0 END) AS NO_REGIAO_nulos,
+    SUM(CASE WHEN NO_UF IS NULL OR NO_UF = '' THEN 1 ELSE 0 END) AS NO_UF_nulos,
+    SUM(CASE WHEN NO_MUNICIPIO IS NULL OR NO_MUNICIPIO = '' THEN 1 ELSE 0 END) AS NO_MUNICIPIO_nulos,
+    SUM(CASE WHEN NO_ENTIDADE IS NULL OR NO_ENTIDADE = '' THEN 1 ELSE 0 END) AS NO_ENTIDADE_nulos,
+    SUM(CASE WHEN TP_DEPENDENCIA IS NULL OR TP_DEPENDENCIA = '' THEN 1 ELSE 0 END) AS TP_DEPENDENCIA_nulos,
+    SUM(CASE WHEN TP_LOCALIZACAO IS NULL OR TP_LOCALIZACAO = '' THEN 1 ELSE 0 END) AS TP_LOCALIZACAO_nulos,
+    SUM(CASE WHEN IN_INTERNET IS NULL OR IN_INTERNET = '' THEN 1 ELSE 0 END) AS IN_INTERNET_nulos,
+    SUM(CASE WHEN IN_ENERGIA_REDE_PUBLICA IS NULL OR IN_ENERGIA_REDE_PUBLICA = '' THEN 1 ELSE 0 END) AS IN_ENERGIA_REDE_PUBLICA_nulos,
+    SUM(CASE WHEN IN_AGUA_POTAVEL IS NULL OR IN_AGUA_POTAVEL = '' THEN 1 ELSE 0 END) AS IN_AGUA_POTAVEL_nulos,
+    SUM(CASE WHEN IN_ESGOTO_REDE_PUBLICA IS NULL OR IN_ESGOTO_REDE_PUBLICA = '' THEN 1 ELSE 0 END) AS IN_ESGOTO_REDE_PUBLICA_nulos,
+    SUM(CASE WHEN IN_BANHEIRO IS NULL OR IN_BANHEIRO = '' THEN 1 ELSE 0 END) AS IN_BANHEIRO_nulos,
+    SUM(CASE WHEN IN_QUADRA_ESPORTES IS NULL OR IN_QUADRA_ESPORTES = '' THEN 1 ELSE 0 END) AS IN_QUADRA_ESPORTES_nulos,
+    SUM(CASE WHEN IN_REFEITORIO IS NULL OR IN_REFEITORIO = '' THEN 1 ELSE 0 END) AS IN_REFEITORIO_nulos,
+    SUM(CASE WHEN IN_BIBLIOTECA IS NULL OR IN_BIBLIOTECA = '' THEN 1 ELSE 0 END) AS IN_BIBLIOTECA_nulos,
+    SUM(CASE WHEN QT_MAT_BAS IS NULL OR QT_MAT_BAS = '' THEN 1 ELSE 0 END) AS QT_MAT_BAS_nulos,
+    SUM(CASE WHEN QT_DOC_BAS IS NULL OR QT_DOC_BAS = '' THEN 1 ELSE 0 END) AS QT_DOC_BAS_nulos,
+    SUM(CASE WHEN QT_TUR_BAS IS NULL OR QT_TUR_BAS = '' THEN 1 ELSE 0 END) AS QT_TUR_BAS_nulos
+FROM 
+    escolas_2024;
+```
+
+📌 **O que esse código faz:**
+
+- Retorna o **número total de registros** da tabela.
+- Conta quantos registros possuem valores **nulos (`IS NULL`)** ou **vazios (`= ''`)** em cada coluna relevante.
+- Permite avaliar **quais campos precisam de tratamento de dados ausentes**.
