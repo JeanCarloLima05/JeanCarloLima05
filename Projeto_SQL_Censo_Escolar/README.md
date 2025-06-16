@@ -777,18 +777,46 @@ Identificar qual a distribuição de escolas publicas e privadas por estado. As 
 ```sql
 SELECT 
   NO_UF AS Estado,
-  CASE TP_DEPENDENCIA
-    WHEN 1 THEN 'Federal'
-    WHEN 2 THEN 'Estadual'
-    WHEN 3 THEN 'Municipal'
-    WHEN 4 THEN 'Privada'
-    ELSE 'Desconhecida'
-  END AS tipo_dependencia,
+  COUNT(CASE WHEN TP_DEPENDENCIA IN (1, 2, 3) THEN 1 END) AS escolas_publicas,
+  COUNT(CASE WHEN TP_DEPENDENCIA = 1 THEN 1 END) AS escolas_federais,
+  COUNT(CASE WHEN TP_DEPENDENCIA = 2 THEN 1 END) AS escolas_estaduais,
+  COUNT(CASE WHEN TP_DEPENDENCIA = 3 THEN 1 END) AS escolas_municipais,
+  COUNT(CASE WHEN TP_DEPENDENCIA = 4 THEN 1 END) AS escolas_privadas,
   COUNT(*) AS total_escolas
 FROM 
   escolas_backup
+WHERE 
+  TP_DEPENDENCIA IN (1, 2, 3, 4)
 GROUP BY 
-  NO_UF, TP_DEPENDENCIA
+  NO_UF
 ORDER BY 
-  NO_UF, tipo_dependencia;
+  NO_UF;
 ```
+
+**Métodos utilizados**
+- Utilizamos COUTN, CASE, WHEN, WHERE, CROUP BY, ORDER BY. Mas nessa consulta utilizamos o método PIVOT, ONDE COLOCAMOS O CASE em apenas uma linha tornando co código mais fácil de ser contruido, otmizando tempo e espaço de código.
+
+📋 **Retorno da consulta:**
+
+A consulta retornou uma tabela do tipo: 
+
+| Estado | escolas_publicas   | escolas_federais | escolas_estaduais | escolas_municipais | escolas_privadas | total_escolas |
+|--------|--------------------|------------------|-------------------|--------------------|------------------|---------------|
+
+A tabela completa com os valores esta no arquivo csv, na pasta do projeto, link a baixo.
+
+## 🔎 Principais Insights
+
+1. **São Paulo** é o estado com maior número de escolas Públicas com **20535** escolas públicas, seguido de **Minas Gerais** e **Bahia**.
+2. **Distrito Federal** é o estado com o menor número de escolas Públicas com **722** escolas públicas, seguido do **Amapá** e **Roraima**.
+3. **São Paulo** também é o estado com maior número de escolas Privadas com **13328** escolas particulares, seguido de **Minas Gerais** e **Rio de Janeiro**.
+4. **Acre** é o estado com o menor número de escolas Privadas com **46** escolas particulares, seguido de **Roraima** e **Amapá**.
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv
+
+- Escolas Pública e Privadas por Estado
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
