@@ -664,6 +664,8 @@ Seguem os dados gerados pelas consultas, em formato csv
 - Quais estados têm maior proporção de escolas com internet?
 [Download dos resultados](./dados/resultado_analise1.csv)
 
+---
+
 ## 2 - Qual a média de turmas por escola em cada região?
 
 ### 📌 Objetivo da Análise
@@ -707,10 +709,12 @@ Seguem os dados gerados pelas consultas, em formato csv
 - Média de turmas por Região
 [Download dos resultados](./dados/resultado_analise1.csv)
 
-## 3 - Quantas escolas têm saneamento básico completo (água + esgoto + energia)?
+---
+
+## 3 - Quantas escolas têm saneamento básico completo (água + esgoto + energia) e qual a porcentagem em relação ao total de escolas??
 
 ### 📌 Objetivo da Análise
-Identificar quantas escolas tem saneamento básico completo, ou seja, quantas escolas possuem água, rede de esgoto e energia elétrica.
+Identificar quantas escolas tem saneamento básico completo, ou seja, quantas escolas possuem água, rede de esgoto e energia elétrica e qual a porcentagem das escolas que possuem esse saneamento e o total de escolas com infomrações válidas.
 
 ```sql
  WITH 
@@ -743,15 +747,48 @@ FROM
 **Métodos utilizados**
 - Uso de **CTEs** (Common Table Expressions) para Clareza na Lógica. Uma CTE calcula o total de escolas válidas, ou seja, quantidades de escolas que apresentão informação nas 3 categorias de saneamento listadas (não apresentando o valore ("-1")). A segunta CTE calcula a quantidade de escolas que possuem o saneamento completo, ou seja, escolas que possuem os três serviço (true).
 - Assim podemos então calcular a porcentagem de escolas que possuem saneamento básico completo em relação ao númeor de escolas total.
-- Usamos WITH ,para cria as CTEs, usamos também os comandos WHERE, COUNT, ROUND e a condicional AND. Além disso foi utilizado uma abrevição do nome das consultas do CTEs para falicitar na modelagem do código. (Ex: com_saneamnto = c e total_escolas = t)
+- Usamos WITH ,para cria as CTEs, usamos também os comandos WHERE, COUNT, ROUND e a condicional AND. Além disso foi utilizado uma abrevição do nome das consultas do CTEs para falicitar na modelagem do código. (Ex: com_saneamento = c e total_escolas = t)
 
 📋 **Retorno da consulta:**
 
-| Saneamento                 |
-|----------------------------|
-|103457	             |
+| Escolas com saneamento     | Total de Escola Validas    | Porcentagem	               |
+|----------------------------|----------------------------|----------------------------|
+|103457                      |181065                      |57.14                       |
 
 
 ## 🔎 Principais Insights
 
-1. A Região **Centro-Oeste** apresenta a maior média da quantidades de turmas por escola, seguidas por **Sudeste**, **Sul**, **Nordeste** e **Norete**, respectivamente.
+1. O número de escolas com sanemanto básico completo é de **103457**.
+2. Temos uma taxa de **57,14%** da escolas com sanemanto básico completo, ou seja, **42,86%** das escolas não possuem sanemanto básico completo.
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv
+
+- Escolas com sanemanto básico completo
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
+## 4 - Qual a distribuição de escolas públicas x privadas por estado?
+
+### 📌 Objetivo da Análise
+Identificar qual a distribuição de escolas publicas e privadas por estado. As escolas públicas são divididas em três tipos Federal, Estadual e Municipal.
+
+```sql
+SELECT 
+  NO_UF AS Estado,
+  CASE TP_DEPENDENCIA
+    WHEN 1 THEN 'Federal'
+    WHEN 2 THEN 'Estadual'
+    WHEN 3 THEN 'Municipal'
+    WHEN 4 THEN 'Privada'
+    ELSE 'Desconhecida'
+  END AS tipo_dependencia,
+  COUNT(*) AS total_escolas
+FROM 
+  escolas_backup
+GROUP BY 
+  NO_UF, TP_DEPENDENCIA
+ORDER BY 
+  NO_UF, tipo_dependencia;
+```
