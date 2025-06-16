@@ -54,3 +54,19 @@ Todas as perguntas, análises e interpretações realizadas são **fictícias** 
 ## 🛠️ Processos de ELT e Modelagem dos Dados
 
 Este projeto foi práticamente desenvolvido no **MYSQL**, desde a importação e transformação dos dados até a criação de consultas. Todas as etapas foram cuidadosamente realizadas para garantir uma análise precisa e eficiente.
+
+## 🗃️ 1️⃣ Criação do DATABASE
+
+### 📌 Etapa Inicial
+O projeto começou com a criação do banco de dados no MySQL para armazenar e analisar os dados educacionais:
+
+```sql
+-- Criação do database para o projeto de análise escolar
+CREATE DATABASE IF NOT EXISTS Censo_Escolar_2024;
+
+-- Seleção do database criado
+USE Censo_Escolar_2024;
+
+-- Verificação de criação bem-sucedida
+SELECT DATABASE() AS Banco_Atual;
+
