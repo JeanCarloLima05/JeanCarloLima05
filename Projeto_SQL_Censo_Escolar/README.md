@@ -1066,3 +1066,77 @@ Seguem os dados gerados pelas consultas, em formato csv
 ## 7 - Quantas escolas de cada nível de infraestrutura existem em uma determinada região e o tipo de rede administrativa?
 
 ## 📌 Objetivo da Análise
+O objetivo é saber o número de escolas da educação básica para cada nível de infraestrutura, passando por uma região específica e por um tipo de rede admistrativa específica (Federal, Estadual, Municípal e Privada).
+
+Para isso iremos criar um Procedure, que por sua vez chama o View criada na pergunta número 6, que por sua vez chama a função que classifica o nível infraestrutura das escolas. Assim podemos passar a região escolhida e o tipo de rede administrativa.
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE contar_nivel_infra_por_rede_regiao(
+	IN regiao_alvo VARCHAR(50), -- Parâmetro de entrada (região)
+    IN tipo_rede INT -- Parâmetro de entrada (1=Federal, 2 = Estadual, 3 = Municipal, 4 = Privada) 
+)
+BEGIN
+	SELECT
+		v.nivel_infra, -- Nível infra da tabela do VIEW
+        COUNT(*) AS total_escolas
+	FROM vw_infra_escolas v -- View criada na pergunta 6 chamando a função (view abreviada para "v")
+    INNER JOIN escolas_backup e ON v.NO_ENTIDADE = e.NO_ENTIDADE  -- Relaciona a VIEW com a tabela original para acessar a região e tipo de rede (tabela principal abreviada para "e").
+    WHERE e.NO_REGIAO = regiao_alvo -- Busca a região na tabela original
+		AND e.TP_DEPENDENCIA = tipo_rede -- Busca o tipo de rede administrativa na tabela original
+	GROUP BY v.nivel_infra 
+    ORDER BY FIELD(v.nivel_infra, 'Alta', 'Média', 'Baixa'); -- ORDER BY FIELD() Garante a ordem da lógica (Alta>Média>baixa) e não alfabética
+END $$
+
+DELIMITER ;
+        
+CALL contar_nivel_infra_por_rede_regiao('Nordeste', 1); -- Chama o procedure e passa os parâmetros (Região , Tipo)
+```
+
+**Métodos utilizados**
+### 🔧 Estrutura Básica
+- `DELIMITER $$` - Altera o delimitador para criação de procedures
+- `CREATE PROCEDURE` - Define um bloco de código reutilizável com parâmetros (`IN`)
+
+### 🔎 Consulta e Filtragem
+- `SELECT ... FROM` - Seleciona dados da view/tabela
+- `INNER JOIN` - Combina dados de tabelas original e do view
+- `WHERE` - Filtra por região e tipo de rede
+
+### 📊 Processamento de Dados
+- `COUNT(*)` - Conta ocorrências por grupo
+- `GROUP BY` - Agrupa resultados por nível de infraestrutura
+- `ORDER BY FIELD()` - Ordena categorias de forma customizada (Alta > Média > Baixa)
+
+### 🚀 Execução
+- `CALL` - Invoca o procedure com parâmetros específicos
+- `vw_infra_escolas` - View pré-existente com classificação de infraestrutura
+
+**🔔 Observação:** 
+A saída da consulta depende dos parâmetros de região e de tipo de rede informados, assim para exemplicifar escolhemos os parâmetros ('Nordeste = região, e 1 ('Federal') = rede) para termos uma saída.
+
+📋 **Retorno da consulta:**
+
+| Nível Infra | Total escolas | 
+|-------------|---------------|
+|Alta         | 200           |
+|Média        | 29            |
+|Baixa        | 7             |
+
+## 🔎 Principais Insights
+
+1. Assim podemos ter uma visão mais detalhada do nível de infraestrutura das escolas. no exmplo podemos notar que a região **Nordeste** apresenta **200** escolas **Federais** com nível **alto** de infraestrutura, **29** escolas **Federais** de nível **médio** e **7** escolas **Federais** de nível **baixo** de infraestrutura.
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv, além do script em sql para teste
+
+- Escolas por nível de infreestrutura por Região e Tipo de Rede Administrativa determinados.
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
+## 7 - Qual é o número médio de docentes, matriculas e turmas por escola em municípios com mais de 100 escolas?
+
+## 📌 Objetivo da Análise
+Identificar o número médio de professores cadastrados, matriculas (alunos) e turmas por escolas nos múnicipios com mais de 100 escolas
