@@ -248,7 +248,11 @@ Por fim, faremos as queries para responder as perguntas de negócio, utilizando 
 CREATE TABLE escolas_backup AS
 SELECT * FROM escolas_2024;
 ```
+## 📜 Scripts SQL
 
+- Script da Criação do Database e Criação da Table:  
+  [Visualizar código SQL](./Scripts_SQL/Criar_Importar_Dados.sql)
+  
 ## 🧹 4️⃣ Limpeza e Transformação dos Dados
 
 Nesta etapa, após a importação bem-sucedida da tabela original e a criação de uma tabela de backup (`escolas_backup`) para tratarmos os dados com mais segurança, iniciamos o processo de limpeza e transformação.
