@@ -725,8 +725,12 @@ GROUP BY
 Seguem os dados gerados pelas consultas, em formato csv
 
 - Média de turmas por Região
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_2/Media_turma_regiao.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_2.sql)
 ---
 
 ## 3 - Quantas escolas têm saneamento básico completo (água + esgoto + energia) e qual a porcentagem em relação ao total de escolas??
@@ -783,8 +787,12 @@ FROM
 Seguem os dados gerados pelas consultas, em formato csv
 
 - Escolas com sanemanto básico completo
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_3/Saneamento_completo.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_3.sql)
 ---
 
 ## 4 - Qual a distribuição de escolas públicas x privadas por estado?
@@ -834,8 +842,12 @@ A tabela completa com os valores esta no arquivo csv, na pasta do projeto, link 
 Seguem os dados gerados pelas consultas, em formato csv
 
 - Escolas Pública e Privadas por Estado
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_4/Escola_publica_privada.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_4.sql)
 ---
 
 ## 5 - Qual o ranking dos 10 municípios com mais turmas?
@@ -877,8 +889,12 @@ LIMIT 10;
 Seguem os dados gerados pelas consultas, em formato csv
 
 - Ranking das 10 cidades com maior números de turmas cadastradas
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_5/top10_municipios_tumas.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_5.sql)
 ---
 
 ## 6 - Quais as escolas tem a melhor infraestrutura (banheiro, quadra esportiva, refeitorio e bibliotecas) por Cidades/Etados/Região?
@@ -1071,14 +1087,19 @@ O código acima também mostra as consultas para Estado e Regiões, além de uma
 Seguem os dados gerados pelas consultas, em formato csv
 
 - Escolas por nível de infreestrutura por Municípios, Estados e Região
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_6/municipios_cidade_estado_infra.csv)
 - Escolas por nível de infreestrutura por Municípios
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_6/municipios_infra.csv)
 - Escolas por nível de infreestrutura por Estados 
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_6/estados_infra.csv)
 - Escolas por nível de infreestrutura por Região
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_6/regioes_infra.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_6.sql)
+  
 ---
 
 ## 7 - Quantas escolas de cada nível de infraestrutura existem em uma determinada região e o tipo de rede administrativa?
@@ -1150,8 +1171,12 @@ A saída da consulta depende dos parâmetros de região e de tipo de rede inform
 Seguem os dados gerados pelas consultas, em formato csv, além do script em sql para teste
 
 - Escolas por nível de infreestrutura por Região e Tipo de Rede Administrativa determinados.
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_7/infra_regiao_rede.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_7.sql)
 ---
 
 ## 8 - Qual é o número médio de docentes, matriculas e turmas por escola em municípios com mais de 100 escolas?
@@ -1228,12 +1253,16 @@ Tabela ordenada para a maior média de **Turmas**
 Seguem os dados gerados pelas consultas, em formato csv.
 
 - Cidades com mais de 100 escolas classificadas, por quantidade de Docentes, Matriculas e Turmas ( Filtrada por Docentes)
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_8/media_doc_prof_tur_filtro_prof.csv)
 - Cidades com mais de 100 escolas classificadas, por quantidade de Docentes, Matriculas e Turmas ( Filtrada por Matrículas)
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_8/media_doc_prof_tur_filtro_alunos.csv)
 - Cidades com mais de 100 escolas classificadas, por quantidade de Docentes, Matriculas e Turmas ( Filtrada por Turmas)
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_8/media_doc_prof_tur_filtro_turma.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_8.sql)
 ---
 
 ## 9 - Qual a distribuição percentual de escolas com água potável por região?
@@ -1286,7 +1315,12 @@ ORDER BY perc_com_agua DESC;
 Seguem os dados gerados pelas consultas, em formato csv.
 
 - Porcentagem de escolas com acesso a água potável por região.
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_9/porc_agua_regiao.csv)
+
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_9.sql)
 
 ---
 
@@ -1337,7 +1371,12 @@ Modelo da tabela gerada pela consulta (O dados completos estão na pasta do arqu
 Seguem os dados gerados pelas consultas, em formato csv.
 
 - Quantidade de matrículas por região e por tipo de rede administrativa.
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_10/matriculas_regiao_tipo.csv)
+
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_10.sql)
 
 ---
 
