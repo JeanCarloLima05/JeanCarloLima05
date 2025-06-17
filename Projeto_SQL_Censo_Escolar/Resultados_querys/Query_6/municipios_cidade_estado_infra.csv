@@ -1,0 +1,21 @@
+NO_MUNICIPIO,NO_UF,NO_REGIAO,total_escolas,escolas_alta,escolas_media,escolas_baixa
+"São Paulo","São Paulo",Sudeste,8023,2766,3742,1515
+"Rio de Janeiro","Rio de Janeiro",Sudeste,4203,2450,1349,404
+"Belo Horizonte","Minas Gerais",Sudeste,2146,1054,292,800
+Fortaleza,Ceará,Nordeste,1348,829,353,166
+Salvador,Bahia,Nordeste,1620,680,484,456
+Manaus,Amazonas,Norte,1107,674,308,125
+Curitiba,Paraná,Sul,1210,642,418,150
+Brasília,"Distrito Federal",Centro-Oeste,1360,618,540,202
+"Porto Alegre","Rio Grande do Sul",Sul,1040,522,301,217
+Recife,Pernambuco,Nordeste,1235,513,362,360
+Goiânia,Goiás,Centro-Oeste,873,473,303,97
+Campinas,"São Paulo",Sudeste,741,378,243,120
+Guarulhos,"São Paulo",Sudeste,745,361,257,127
+Belém,Pará,Norte,704,357,186,161
+"São Luís",Maranhão,Nordeste,829,357,245,227
+"Campo Grande","Mato Grosso do Sul",Centro-Oeste,552,308,165,79
+"São Gonçalo","Rio de Janeiro",Sudeste,576,305,168,103
+"Duque de Caxias","Rio de Janeiro",Sudeste,603,294,215,94
+Natal,"Rio Grande do Norte",Nordeste,633,288,155,190
+Uberlândia,"Minas Gerais",Sudeste,434,275,86,73
