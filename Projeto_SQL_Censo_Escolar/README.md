@@ -180,6 +180,13 @@ df.to_csv(
     encoding='utf-8'   # Codificação apropriada para importação no MySQL
 )
 ```
+## 📁 Dados Gerados
+Seguem os dados gerados, o código em python e o arquivo em formato csv dos dados a serem importados, comas as devidas colunas selecionadas
+
+- Código python utilizado
+[Download dos resultados](./Base_de_Dados/Escolas_censo2024.py)
+- Arquivo CSV dos dados a serem analisados
+[Download dos resultados](./Base_de_Dados/escolas_2024_filtrado.csv)
 
 ## 💾 Importação dos Dados no MySQL
 
