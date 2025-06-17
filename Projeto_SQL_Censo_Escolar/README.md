@@ -1224,9 +1224,10 @@ Seguem os dados gerados pelas consultas, em formato csv.
 Identificar a distribuição percentual de escolas que possuem acesso a água potável por região.
 
 ```sql
-WITH total_regiao AS ( -- Calculo do total de escolas por região
+WITH total_regiao AS ( -- Calculo do total de escolas válidas por região
 	SELECT NO_REGIAO, COUNT(*) AS total_escolas
     FROM escolas_backup
+    WHERE IN_AGUA_POTAVEL IN (0, 1) - Escolas valídas
     GROUP BY NO_REGIAO
 ), com_agua AS (  -- Calculo de escolas por região que possuem água potável (IN_AGUA_POTAVEL = 1 ou true)
     SELECT NO_REGIAO, COUNT(*) AS escolas_com_agua
@@ -1240,8 +1241,87 @@ SELECT
 FROM total_regiao t -- Definição do Alias "t" para total_regiao
 JOIN com_agua a USING (NO_REGIAO) -- Definição do Alias "a" para com_agua
 ORDER BY perc_com_agua DESC;
+```
 
 **Métodos utilizados**
-- Uso de **CTEs** (Common Table Expressions) para Clareza na Lógica. Uma CTE calcula o total de escolas válidas, ou seja, quantidades de escolas que apresentão informação nas 3 categorias de saneamento listadas (não apresentando o valore ("-1")). A segunta CTE calcula a quantidade de escolas que possuem o saneamento completo, ou seja, escolas que possuem os três serviço (true).
-- Assim podemos então calcular a porcentagem de escolas que possuem saneamento básico completo em relação ao númeor de escolas total.
-- Usamos WITH ,para cria as CTEs, usamos também os comandos WHERE, COUNT, ROUND e a condicional AND. Além disso foi utilizado uma abrevição do nome das consultas do CTEs para falicitar na modelagem do código. (Ex: com_saneamento = c e total_escolas = t)
+- Uso de **CTEs** (Common Table Expressions) para Clareza na Lógica. Uma CTE calcula o total de escolas válidas, ou seja, quantidades de escolas que apresentão informação sobre acesso a água potável (sim =1 ou não =0) (não apresentando o valor ("-1")). A segunta CTE calcula a quantidade de escolas que possuem acesso a água potável, ou seja, escolas que possuem água potável = 1 ou (true).
+- Assim podemos então calcular a porcentagem de escolas que possuem acesso a água potável completo em relação ao númeor de escolas total válidas , por região.
+- Usamos WITH ,para cria as CTEs, usamos também os comandos WHERE, COUNT, ROUND, JOIN e a condicional AND. Além disso foi utilizado uma abrevição do nome das consultas do CTEs para falicitar na modelagem do código. (Ex: com_saneamento = c e total_escolas = t) definição dos "Alias".
+
+📋 **Retorno da consulta:**
+
+| Região     | % com acesso a água potável |
+|------------|-----------------------------|
+|Sudeste     | 89.35                       |
+|Sul         | 65.14                       |
+|Centro-Oeste| 57.25                       |
+|Nordeste    | 39.92                       |
+|Norte       | 13.55                       |
+
+## 🔎 Principais Insights
+
+1. Notamos um indicador preocupante, enquanto a Região **Sudeste** apresenta cerca de **89,35%** das escolas com água potável, a Região **Norte** apresenta apenas **13,55%** das escolas com acesso a água potável. Uma visaõ muito drastica e contrastante do cenario de infraestrutura e saneamento da educação básica no Brasil.
+2. Vemos que os indicadores podem variar de forma drastica apenas mudando a região do pais, mostrando um desigualdade no sistema de Educação Básica.
+
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv.
+
+- Porcentagem de escolas com acesso a água potável por região.
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
+## 10 - Qual o Total de alunos por tipo de escola em cada estado? 
+
+## 📌 Objetivo da Análise
+Identificar qual o total de alunos (matrículas) por tipo de escola (Federal, Estadual, Municípal, Privada) em cada Estado.
+
+```sql
+CREATE VIEW total_matriculas_por_estado_tipo AS 
+SELECT 
+	NO_UF,
+    CASE TP_DEPENDENCIA -- Classificar as escolas pelo tipo 
+		WHEN 1 THEN 'Federal'
+        WHEN 2 THEN 'Estadual'
+        WHEN 3 THEN 'Municipal'
+        WHEN 4 THEN 'Privada'
+	END AS tipo_escola,
+    SUM(QT_MAT_BAS) AS total_matriculas -- Soma da quantidade de matrículas (alunos)
+FROM escolas_backup
+WHERE QT_MAT_BAS != -1 -- Filtras apenas pelas escolas válidas
+GROUP BY NO_UF, TP_DEPENDENCIA;
+        
+SELECT * FROM total_matriculas_por_estado_tipo; -- Chamar a VIEW 
+```
+📋 **Retorno da consulta:**
+
+Modelo da tabela gerada pela consulta (O dados completos estão na pasta do arquivo)
+
+| Estado  | Tipo Escola  | Total Matriculas |
+|---------|--------------|------------------|
+|Estado 1 | Federal      | # núm matricula  |
+|Estado 1 | Estadual     | # núm matricula  |
+|Estado 1 | Municipal    | # núm matricula  |
+|Estado 1 | Privada      | # núm matricula  |
+|Estado 2 | Federal      | # núm matricula  |
+|......   | .....        |  .....           |
+
+## 🔎 Principais Insights
+
+1. Notamos uma variação grande de estado para estado, alguns estados há maiores quantidades de alunas nas redes Estaduais (Exemplo: **Acre**, já em outros há maiores quantidades de alunos nas redes Municípais (Exemplo: "Esírito Santo**).
+2. Nas Redes Municípais o Estado com maior número de matrículas é **São Paulo**, seguido de **Minas Gerais** e **Bahia**.
+3. Nas Redes Estaduais o Estado com maior número de matrículas é **São Paulo**, seguido de **Minas Gerais** e **Paraná**.
+4. Nas Redes Federais o Estado com maior número de matrículas é **Minas Gerais**, seguido de **Rio de Janeiro** e **Rio Grande do Sul**.
+5. Nas Redes Privada o Estado com maior número de matrículas é **São Paulo**, seguido de **Rio de Janeiro** e **Minas Gerais**.  
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv.
+
+- Quantidade de matrículas por região e por tipo de rede administrativa.
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
+## 7️⃣ 📊 CONCLUSÃO DO PROJETO
+
