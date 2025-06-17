@@ -15,7 +15,7 @@ Como o tamanho dos aquivos de dados são muito grandes para serem upados aqui. A
 
 ## 🎯 Objetivo
 
-Este projeto tem como objetivo **analisar dados educacionais do Brasil** utilizando **SQL**, com foco em identificar gargalos de infraestrutura em escolas públicas e privadas. Entre os aspectos investigados estão:
+Este projeto tem como objetivo **analisar dados educacionais do Brasil** utilizando **MYSQL WORKBENCH**, com foco em identificar gargalos de infraestrutura em escolas públicas e privadas. Entre os aspectos investigados estão:
 
 - 📡 Acesso à internet  
 - 💧 Saneamento básico  
