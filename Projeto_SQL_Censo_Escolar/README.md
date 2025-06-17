@@ -1136,7 +1136,89 @@ Seguem os dados gerados pelas consultas, em formato csv, além do script em sql 
 
 ---
 
-## 7 - Qual é o número médio de docentes, matriculas e turmas por escola em municípios com mais de 100 escolas?
+## 8 - Qual é o número médio de docentes, matriculas e turmas por escola em municípios com mais de 100 escolas?
 
 ## 📌 Objetivo da Análise
-Identificar o número médio de professores cadastrados, matriculas (alunos) e turmas por escolas nos múnicipios com mais de 100 escolas
+Identificar o número médio de professores cadastrados, matriculas (alunos) e turmas por escolas nos municípios com mais de 100 escolas.
+
+```sql
+SELECT 
+  NO_MUNICIPIO,
+  COUNT(*) AS total_escolas,
+  ROUND(AVG(CASE WHEN QT_DOC_BAS != -1 THEN QT_DOC_BAS END), 2) AS media_docentes, -- Calculando a média de professores, apenas para os casos válidos (diferentes de "-1"), aredondando para 2 casa decimais e salvando na variavel 'media_docentes'
+  ROUND(AVG(CASE WHEN QT_MAT_BAS != -1 THEN QT_MAT_BAS END), 2) AS media_matriculas, -- Calculando a média de alunos (matriculas), apenas para os casos válidos (diferentes de "-1"), aredondando para 2 casa decimais e salvando na variavel 'media_matriculas'
+  ROUND(AVG(CASE WHEN QT_TUR_BAS != -1 THEN QT_TUR_BAS END), 2) AS media_turmas -- Calculando a média de turmas, apenas para os casos válidos (diferentes de "-1"), aredondando para 2 casa decimais e salvando na variavel 'media_turmas'
+FROM escolas_backup
+GROUP BY NO_MUNICIPIO
+HAVING COUNT(*) > 100 -- Filtrando apenas para os municípios que possuem masi de 100 escolas
+ORDER BY media_docentes DESC; --LIMIT 10 (OPCIONAL); -- Ordenando da maior média de professores para a menor,opção
+```
+📋 **Retorno da consulta:**
+
+Para facilitar a vizualização aqui limitamos para as 10 primeiras cidades, mas o código está para todas as cidades.
+
+Tabela ordenada para a maior média de **Docentes**
+| Cidade               | Escolas | Média Prodessores | Média Alunos | Média Turmas |
+|----------------------|--------:|-------------:|-------------:|------------------:|
+| Praia Grande         | 181     | 39.70        | 560.25       | 23.94             |
+| Vitória              | 236     | 32.47        | 430.84       | 19.06             |
+| Serra                | 279     | 32.03        | 527.03       | 21.80             |
+| Vila Velha           | 289     | 31.39        | 484.19       | 20.80             |
+| Barueri              | 167     | 31.28        | 582.77       | 21.71             |
+| Campo Grande         | 593     | 30.00        | 411.16       | 17.56             |
+| Dourados             | 152     | 29.74        | 424.46       | 18.73             |
+| Uberaba              | 280     | 29.52        | 395.78       | 18.38             |
+| Cariacica            | 226     | 29.27        | 435.93       | 17.99             |
+| Ribeirão das Neves   | 178     | 29.22        | 491.34       | 20.06             |
+
+Tabela ordenada para a maior média de **Matriculas**
+| Cidade                  | Escolas | Média Prodessores | Média Alunos | Média Turmas |
+|-------------------------|--------:|-------------:|-------------:|------------------:|
+| Itapevi                 | 103     | 26.33        | 611.77       | 20.85             |
+| Águas Lindas de Goiás   | 106     | 19.24        | 590.88       | 21.28             |
+| Barueri                 | 167     | 31.28        | 582.77       | 21.71             |
+| Praia Grande            | 181     | 39.70        | 560.25       | 23.94             |
+| Francisco Morato        | 108     | 22.27        | 546.00       | 21.10             |
+| Parauapebas             | 146     | 18.49        | 532.45       | 23.75             |
+| Serra                   | 279     | 32.03        | 527.03       | 21.80             |
+| Manaus                  | 1107    | 21.98        | 509.16       | 19.96             |
+| Aparecida de Goiânia    | 247     | 19.11        | 493.00       | 17.02             |
+| Ribeirão das Neves      | 178     | 29.22        | 491.34       | 20.06             |
+
+Tabela ordenada para a maior média de **Turmas**
+| Cidade               | Escolas | Média Prodessores | Média Alunos | Média Turmas |
+|----------------------|--------:|-------------:|-------------:|------------------:|
+| Praia Grande         | 181     | 39.70        | 560.25       | 23.94             |
+| Parauapebas          | 146     | 18.49        | 532.45       | 23.75             |
+| Brasília             | 1360    | 26.25        | 490.34       | 22.48             |
+| Serra                | 279     | 32.03        | 527.03       | 21.80             |
+| Barueri              | 167     | 31.28        | 582.77       | 21.71             |
+| Águas Lindas de Goiás| 106     | 19.24        | 590.88       | 21.28             |
+| Francisco Morato     | 108     | 22.27        | 546.00       | 21.10             |
+| Itapevi              | 103     | 26.33        | 611.77       | 20.85             |
+| Vila Velha           | 289     | 31.39        | 484.19       | 20.80             |
+| Florianópolis        | 365     | 25.32        | 405.74       | 20.27             |
+
+## 🔎 Principais Insights
+
+1. Notamos que a Cidade de **Praia Grande** tem a maior média de professores por escola com quase **40** por escola, seguido pelas cidades de **Vitória** e **Serra**.
+2. Fazendo um novo Filtro agora pela maior média de **Alunos**(matrículas): A cidade de **Itapevi** tem a maior média de alunos por escola com quase **612** alunos, seguido pelas cidades de **Águas Lindas de Goiás** e **Barueri**.
+3. Fazendo um novo Filtro agora pela maior média de **Turmas**(matrículas): A cidade de **Praia Grande** tem a maior média de turmas por escola com quase **24** turmas, seguido pelas cidades de **Parauapebas** e **Brasília**.
+4. Notamos como os dados podem variar de forma diferentees quando variamos os parâmetros (Docentes, Matriculas e turmas), permitindo uma análise mais profunda dos dados.
+
+## 📁 Dados Completos
+Seguem os dados gerados pelas consultas, em formato csv.
+
+- Cidades com mais de 100 escolas classificadas, por quantidade de Docentes, Matriculas e Turmas ( Filtrada por Docentes)
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Cidades com mais de 100 escolas classificadas, por quantidade de Docentes, Matriculas e Turmas ( Filtrada por Matrículas)
+[Download dos resultados](./dados/resultado_analise1.csv)
+- Cidades com mais de 100 escolas classificadas, por quantidade de Docentes, Matriculas e Turmas ( Filtrada por Turmas)
+[Download dos resultados](./dados/resultado_analise1.csv)
+
+---
+
+## 9 - Qual a distribuição percentual de escolas com água potável por região?
+
+## 📌 Objetivo da Análise
+Identificar a distribuição percentual de escolas que possuem acesso a água potável por região.
