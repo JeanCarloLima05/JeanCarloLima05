@@ -1222,3 +1222,26 @@ Seguem os dados gerados pelas consultas, em formato csv.
 
 ## 📌 Objetivo da Análise
 Identificar a distribuição percentual de escolas que possuem acesso a água potável por região.
+
+```sql
+WITH total_regiao AS ( -- Calculo do total de escolas por região
+	SELECT NO_REGIAO, COUNT(*) AS total_escolas
+    FROM escolas_backup
+    GROUP BY NO_REGIAO
+), com_agua AS (  -- Calculo de escolas por região que possuem água potável (IN_AGUA_POTAVEL = 1 ou true)
+    SELECT NO_REGIAO, COUNT(*) AS escolas_com_agua
+    FROM escolas_backup
+    WHERE IN_AGUA_POTAVEL = 1
+    GROUP BY NO_REGIAO
+)
+SELECT 
+	t.NO_REGIAO,
+    ROUND((A.escolas_com_agua / t.total_escolas)* 100, 2) AS perc_com_agua  -- Calculo a porcentagem de escolas por região que possuem acesso a água potável
+FROM total_regiao t -- Definição do Alias "t" para total_regiao
+JOIN com_agua a USING (NO_REGIAO) -- Definição do Alias "a" para com_agua
+ORDER BY perc_com_agua DESC;
+
+**Métodos utilizados**
+- Uso de **CTEs** (Common Table Expressions) para Clareza na Lógica. Uma CTE calcula o total de escolas válidas, ou seja, quantidades de escolas que apresentão informação nas 3 categorias de saneamento listadas (não apresentando o valore ("-1")). A segunta CTE calcula a quantidade de escolas que possuem o saneamento completo, ou seja, escolas que possuem os três serviço (true).
+- Assim podemos então calcular a porcentagem de escolas que possuem saneamento básico completo em relação ao númeor de escolas total.
+- Usamos WITH ,para cria as CTEs, usamos também os comandos WHERE, COUNT, ROUND e a condicional AND. Além disso foi utilizado uma abrevição do nome das consultas do CTEs para falicitar na modelagem do código. (Ex: com_saneamento = c e total_escolas = t)
