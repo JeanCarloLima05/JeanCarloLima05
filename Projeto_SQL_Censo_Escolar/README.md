@@ -308,7 +308,12 @@ Após verificarmos todas as linhas da tabela e também analisarmos a variável `
 - **Não foram encontradas duplicatas completas** entre os registros.
 - **Não foram identificados nomes de escolas repetidos** com o mesmo `id`.
 
-📌 Com isso, concluímos que **não há valores ou linhas duplicadas** nos dados da tabela `escolas_2024`. Podemos seguir com segurança para a próxima etapa do tratamento dos dados.
+📌 Com isso, concluímos que **não há valores ou linhas duplicatas** nos dados da tabela `escolas_2024`. Podemos seguir com segurança para a próxima etapa do tratamento dos dados.
+
+## 📜 Scripts SQL
+
+- Script da Verificação de Duplicatas:  
+  [Visualizar código SQL](./Scripts_SQL/Verificar_Duplicatas.sql)
 
 ---
 
@@ -578,6 +583,11 @@ SELECT * FROM escolas_backup LIMIT 10;
 Assim os valores nulos e vazios das variaveis quantitativas foram devidamente substituidos pelo valor '-1', que significa que não há informações para aquela escola. Com isso resolvemos os problemas dos valores nulos em nossa base de dados. 
 
 Assim terminamos a etapa de Limpeza e trasnformação dos dados, podendo assim passa para etapa, onde começaremos a responder as perguntas de negocíso utilizando as consultas do SQL.
+
+## 📜 Scripts SQL
+
+- Script de Tratamento dos Velores Nulos:  
+  [Visualizar código SQL](./Scripts_SQL/Valores_Nulos.sql)
 
 ---
 
