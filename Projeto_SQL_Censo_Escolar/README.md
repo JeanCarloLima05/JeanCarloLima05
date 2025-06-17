@@ -184,7 +184,7 @@ df.to_csv(
 Seguem os dados gerados, o código em python e o arquivo em formato csv dos dados a serem importados, comas as devidas colunas selecionadas
 
 - Código python utilizado
-[Download dos resultados](./Base_de_Dados/Escolas_censo2024.py)
+[Download dos resultados](./Base_de_Dados/Escola_censo2024.py)
 - Arquivo CSV dos dados a serem analisados
 [Download dos resultados](./Base_de_Dados/escolas_2024_filtrado.csv)
 
