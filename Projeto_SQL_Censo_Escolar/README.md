@@ -670,14 +670,18 @@ ORDER BY
 Seguem os dados gerados pelas consultas, em formato csv
 
 - Escolas com acesso a internet por estado
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_1/Escolas_com_internet_Estado.csv)
 - Escolas sem acesso a internet por estado
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_1/Escolas_sem_internet_Estado.csv)
 - Escolas sem informações sobre acesso a internet por estado
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_1/Escolas_sem_informacao_Estado.csv)
 - Quais estados têm maior proporção de escolas com internet?
-[Download dos resultados](./dados/resultado_analise1.csv)
+[Download dos resultados](./Resultados_querys/Query_1/Porcentagem_Escolas_com_internet_Estado.csv)
 
+## 📜 Scripts SQL
+
+- Script da Query 1 :  
+  [Visualizar código SQL](./Scripts_SQL/Query_1.sql)
 ---
 
 ## 2 - Qual a média de turmas por escola em cada região?
