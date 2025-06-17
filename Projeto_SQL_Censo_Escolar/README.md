@@ -1336,11 +1336,12 @@ consultas em  linguagem SQL.
    - Limpeza e Trasnformação de dados: Verificação e Remoção de Duplicatas, Verificação e Trasnformação de Valores Nulos.
    - Criação de Functions e Procedures.
    - Criação de VIEWs e CTEs.
-   - Utilização de `SELECT` , `JOIN` , `WHERE` para Consulta filtrada.
-   - Utilização de `COUNT` , `GROUP BY` para  Agregação.
+   - Utilização de `SELECT` , `JOIN` , `WHERE`, `CASE`, `WHEN` para Consulta filtrada.
+   - Utilização de `COUNT` , `GROUP BY`, `SUM`, `AVG` para  Agregação.
    - Utilização de ORDER BY` para Ordenação
    - Utilização de CALL` para Execução com parâmetros (Functions, procedures e view)
-   - 
+   - Utilização `IF ELSE` para Estrutura de controle (Condicionais)
+   - Utilização de ALIAS para Renomear colunas ou expressões. 
 
 ### 🛠️ Ferramentas Utilizadas
 O projeto foi desenvolvido integralmente no **MYSQL WORKBENCH**, demonstrando:
