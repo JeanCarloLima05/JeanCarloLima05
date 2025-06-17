@@ -8,8 +8,8 @@ Este é um projeto **pessoal de análise de dados**, desenvolvido com o objetivo
 O projeto foi inteiramente construído dentro do MYSQL, utilizando o **dataset "Microdados do Censo Escolar da Educação Básica 2024"**, amplamente conhecido e disponível publicamente no site do INEP:  
 🔗 [Link para o dataset no INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar) 
 
-Na Pasta desse projeto contem apenas o arquivo csv com os dados já filtrados. 
-Como o tamanho dos aquivos de dados são muito grandes para cerem upados aqui, acima temos o link para o download do mesmo completo.
+Na Pasta desse projeto contém apenas o arquivo csv com os dados já filtrados. 
+Como o tamanho dos aquivos de dados são muito grandes para serem upados aqui. Acima temos o link para o download do mesmo completo.
 
 ---
 
