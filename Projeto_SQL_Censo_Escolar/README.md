@@ -676,7 +676,7 @@ Seguem os dados gerados pelas consultas, em formato csv
 - Escolas sem informações sobre acesso a internet por estado
 [Download dos resultados](./Resultados_querys/Query_1/Escolas_sem_informacao_Estado.csv)
 - Quais estados têm maior proporção de escolas com internet?
-[Download dos resultados](./Resultados_querys/Query_1/Porcentagem_Escolas_com_internet_Estado.csv)
+[Download dos resultados](./Resultados_querys/Query_1/Pocentagem_Escolas_com_internet_Estado.csv)
 
 ## 📜 Scripts SQL
 
