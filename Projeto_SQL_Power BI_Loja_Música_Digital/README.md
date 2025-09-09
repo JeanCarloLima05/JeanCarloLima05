@@ -143,4 +143,41 @@ FROM Invoice
 GROUP BY STRFTIME('%Y-%m', InvoiceDate)
 ORDER BY YearMonth;
 ```
+
 ## 🛠️ Etapa 2 – Exploração e Consultas de Negócio
+
+Aqui usamos as **views criadas** (`vw_sales_summary`, `vw_tracks_sales`, `vw_fact_sales`, `vw_monthly_sales`, `vw_time`) para responder as **❓ Perguntas de Negócio**, em diferentes níveis de complexidade.
+
+## 🎯 Vendas e Receita
+
+❓ Qual é a receita total da loja?  
+```sql
+SELECT SUM(InvoiceTotal) AS TotalRevenue
+FROM vw_sales_summary;
+```
+
+❓ Qual é a evolução das vendas por ano e mês?
+```sql
+SELECT YearMonth, SUM(InvoiceTotal) AS TotalVendido
+FROM vw_time t
+JOIN vw_sales_summary s ON t.InvoiceId = s.InvoiceId
+GROUP BY YearMonth
+ORDER BY YearMonth;
+```
+
+❓ Quais são os gêneros musicais mais vendidos?
+```sql
+SELECT Genre, SUM(LineTotal) AS Revenue
+FROM vw_tracks_sales
+GROUP BY Genre
+ORDER BY Revenue DESC;
+```
+
+❓ Quem são os clientes que mais gastaram? (Top 10)
+```sql
+SELECT CustomerName, Country, SUM(InvoiceTotal) AS TotalGasto
+FROM vw_sales_summary
+GROUP BY CustomerId
+ORDER BY TotalGasto DESC
+LIMIT 10;
+```
