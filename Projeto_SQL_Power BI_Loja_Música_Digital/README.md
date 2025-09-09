@@ -23,6 +23,37 @@ Principais tabelas do Chinook:
 
 ---
 
+## ❓ Perguntas de Negócio
+
+Essas perguntas guiarão a parte SQL e depois serão visualizadas no Power BI.
+
+
+### 🎯 Vendas e Receita
+- Qual é a receita total da loja?
+- Qual é a evolução das vendas por ano e mês?
+- Quais são os gêneros musicais mais vendidos?
+- Quem são os clientes que mais gastaram?
+
+
+### 👥 Clientes e Funcionários
+- Qual país concentra mais clientes ativos?
+- Quem são os 3 clientes mais rentáveis em cada país?
+- Qual funcionário (suporte a clientes) está associado ao maior volume de vendas?
+
+
+### 🎵 Catálogo de Músicas
+- Quais são os artistas mais vendidos?
+- Quais são os álbuns mais vendidos?
+- Qual o preço médio por faixa em cada gênero?
+
+
+### 📊 Indicadores Estratégicos
+- Qual é o ticket médio por cliente?
+- Quais são as tendências de crescimento de vendas?
+- Qual é o gênero musical com maior potencial de receita?
+
+---
+
 ## 🛠️ Etapa 1 – ETL e Modelagem em SQL
 Criação de **views** para organizar os dados e facilitar análises.
 
