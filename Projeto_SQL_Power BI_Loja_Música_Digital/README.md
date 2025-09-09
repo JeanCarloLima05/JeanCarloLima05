@@ -181,3 +181,121 @@ GROUP BY CustomerId
 ORDER BY TotalGasto DESC
 LIMIT 10;
 ```
+
+## 👥 Clientes e Funcionários
+
+❓ Qual país concentra mais clientes ativos?
+```sql
+SELECT Country, COUNT(DISTINCT CustomerId) AS TotalCustomers
+FROM vw_sales_summary
+GROUP BY Country
+ORDER BY TotalCustomers DESC;
+```
+
+❓ Qual funcionário (suporte a clientes) está associado ao maior volume de vendas?
+```sql
+SELECT SupportRep, SUM(InvoiceTotal) AS TotalSales
+FROM vw_sales_summary
+GROUP BY SupportRep
+ORDER BY TotalSales DESC;
+```
+
+❓ Quem são os 3 clientes mais rentáveis em cada país?
+```sql
+WITH ranked_customers AS (
+    SELECT 
+        Country,
+        CustomerName,
+        SUM(InvoiceTotal) AS TotalSpent,
+        RANK() OVER (PARTITION BY Country ORDER BY SUM(InvoiceTotal) DESC) AS RankPos
+    FROM vw_sales_summary
+    GROUP BY Country, CustomerId
+)
+SELECT * 
+FROM ranked_customers
+WHERE RankPos <= 3
+ORDER BY Country, RankPos;
+```
+
+## 🎵 Catálogo de Músicas
+
+❓ Quantidade de álbuns cadastrados por artista.
+```sql
+SELECT ar.Name AS Artist, COUNT(al.AlbumId) AS TotalAlbums
+FROM Artist ar
+JOIN Album al ON ar.ArtistId = al.ArtistId
+GROUP BY ar.Name
+ORDER BY TotalAlbums DESC;
+```
+
+❓ Quais são os artistas mais vendidos? (Top 5)
+```sql
+SELECT Artist, SUM(LineTotal) AS Revenue
+FROM vw_tracks_sales
+GROUP BY Artist
+ORDER BY Revenue DESC
+LIMIT 5;
+```
+
+❓ Quais são os álbuns mais vendidos?
+```sql
+SELECT Album, SUM(LineTotal) AS Revenue
+FROM vw_tracks_sales
+GROUP BY Album
+ORDER BY Revenue DESC
+LIMIT 5;
+```
+
+❓ Qual a faixa mais cara vendida em cada gênero musical?
+```sql
+WITH ranked_tracks AS (
+    SELECT 
+        Genre,
+        TrackName,
+        UnitPrice,
+        RANK() OVER (PARTITION BY Genre ORDER BY UnitPrice DESC) AS RankPos
+    FROM vw_tracks_sales
+)
+SELECT Genre, TrackName, UnitPrice
+FROM ranked_tracks
+WHERE RankPos = 1
+ORDER BY Genre;
+```
+
+## 📊 Indicadores Estratégicos
+
+❓ Qual é o ticket médio por cliente?
+```sql
+SELECT AVG(CustomerTotal) AS AvgTicket
+FROM (
+    SELECT CustomerId, SUM(InvoiceTotal) AS CustomerTotal
+    FROM vw_sales_summary
+    GROUP BY CustomerId
+);
+```
+
+❓ Quais são as tendências de crescimento de vendas? (Receita acumulada)
+```sql
+WITH monthly_sales AS (
+    SELECT 
+        YearMonth,
+        SUM(InvoiceTotal) AS Revenue
+    FROM vw_time t
+    JOIN vw_sales_summary s ON t.InvoiceId = s.InvoiceId
+    GROUP BY YearMonth
+)
+SELECT 
+    YearMonth,
+    Revenue,
+    SUM(Revenue) OVER (ORDER BY YearMonth) AS CumulativeRevenue
+FROM monthly_sales;
+```
+
+❓ Qual é o gênero musical com maior potencial de receita?
+```sql
+SELECT Genre, SUM(LineTotal) AS Revenue
+FROM vw_tracks_sales
+GROUP BY Genre
+ORDER BY Revenue DESC
+LIMIT 1;
+```
