@@ -194,6 +194,14 @@ JOIN vw_sales_summary s ON t.InvoiceId = s.InvoiceId
 GROUP BY YearMonth
 ORDER BY YearMonth;
 ```
+📸 Resultado da consulta:
+
+
+
+📝 Interpretação:
+
+Utilizando a view de dimensionamento de tempo podemos obter o ano/mês, a juntamente com a view do resumo de vendas podemos fazer o romatoria da receita de vendas e agrupar por ano e mês. 
+Assim obtemos uma tabela ordenada por ano/mês, notando que a receita de venda segue um valor médio, com oscilações em alguns meses específicos, mas sempre com aumento da receita em tais meses.
 
 ❓ Quais são os gêneros musicais mais vendidos?
 ```sql
