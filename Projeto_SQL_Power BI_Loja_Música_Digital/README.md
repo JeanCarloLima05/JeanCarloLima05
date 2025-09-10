@@ -179,7 +179,9 @@ SELECT SUM(InvoiceTotal) AS TotalRevenue
 FROM vw_sales_summary;
 ```
 📸 Resultado da consulta:
-![Texto alternativo](caminho/para/imagem.png)
+
+![Resultado](Projeto_SQL_Power BI_Loja_Música_Digital/Resultados das Consultas/Resultado_1.png)
+
 📝 Interpretação:
 
 
