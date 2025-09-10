@@ -184,7 +184,7 @@ FROM vw_sales_summary;
 
 📝 Interpretação:
 
-Foi obtido uma receita de 2328,60 dolares, com as vendas de músicas digitais.
+Foi obtido uma receita de **2328,60** dolares, com as vendas de músicas digitais.
 
 ❓ Qual é a evolução das vendas por ano e mês?
 ```sql
@@ -211,8 +211,8 @@ ORDER BY ReceitaFaixa DESC;
 
 📝 Interpretação:
 
-Temos a soma das receita gerada por essa faixa específica (Quantidades x preço por unidade de faixa), assim agrupando por genero e ordenando dos generos mais vendidos para os menos vendidos. Temos que o gênero de Rock foi o mais vendido com 826,65, seguido do estilo músical Latino com 382,14 e em terceito o gênero Metal com 261,26 de receita gerada.
-O Rock é o estilo músical que mais se destaca nas vendas online de música na loja, obtendo uma receita cerca de 53,77% maior que o segundo estilo mais vendido.
+Temos a soma das receita gerada por essa faixa específica (Quantidades x preço por unidade de faixa), assim agrupando por genero e ordenando dos generos mais vendidos para os menos vendidos. Temos que o gênero de **Rock** foi o mais vendido com **826,65**, seguido do estilo músical **Latino** com **382,14** e em terceito o gênero **Metal** com **261,26** de receita gerada.
+O **Rock** é o estilo músical que mais se destaca nas vendas online de música na loja, obtendo uma receita cerca de **53,77%** maior que o segundo estilo mais vendido.
 
 
 ❓ Quem são os clientes que mais gastaram? (Top 10)
