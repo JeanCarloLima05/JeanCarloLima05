@@ -180,10 +180,11 @@ FROM vw_sales_summary;
 ```
 📸 Resultado da consulta:
 
-![Resultado](Projeto_SQL_PowerBI_Loja_Musica_Digital/ResultadoConsulta/Resultado1.png)
+![Resultado](./Projeto_SQL_PowerBI_Loja_Musica_Digital/ResultadoConsulta/Resultado1.png)
 
 📝 Interpretação:
 
+Foi obtido uma receita de 2328,60 dolares, com as vendas de músicas digitais.
 
 ❓ Qual é a evolução das vendas por ano e mês?
 ```sql
