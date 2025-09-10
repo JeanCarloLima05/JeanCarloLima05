@@ -1,5 +1,19 @@
 # 🎵 Projeto SQL & Power BI - Loja de Música Digital (Chinook Database)
 
+## 🎯 Objetivo do Projeto
+
+Este projeto tem como objetivo **simular uma situação real de análise de dados em um contexto de negócio**, utilizando o **Chinook Database** (base pública e gratuita).  
+
+A proposta é aplicar técnicas de **SQL (SQLite)** e **Power BI** para:  
+- Organizar e explorar dados de clientes, vendas e catálogo musical.  
+- Responder a **perguntas de negócio** relevantes para a gestão da empresa.  
+- Criar indicadores estratégicos que auxiliem na **tomada de decisões**.  
+
+📌 **Benefício**:  
+Este case simula como uma empresa de **streaming/loja digital de música** poderia acompanhar sua **receita, clientes e catálogo musical** para identificar oportunidades de crescimento, entender o comportamento dos clientes e apoiar decisões estratégicas.
+
+---
+
 ## 📌 Contexto do Projeto
 O **Chinook Database** simula uma loja de música digital, contendo informações sobre:
 - Clientes
@@ -11,6 +25,15 @@ O **Chinook Database** simula uma loja de música digital, contendo informaçõe
 
 O objetivo deste projeto é **analisar o desempenho de vendas, clientes e catálogo musical**, utilizando **SQL (SQLite)** para tratamento, exploração e modelagem dos dados, e **Power BI** para visualizações e storytelling.
 
+## 📂 Fonte dos Dados
+
+Este projeto utiliza o **Chinook Database**, uma base de dados **pública e gratuita** muito utilizada em treinamentos de SQL.  
+O banco simula uma **loja de música digital**, contendo informações sobre clientes, funcionários, artistas, álbuns, faixas, gêneros e faturas de vendas.  
+
+🔗 Disponível em: [Chinook Database no GitHub](https://github.com/lerocha/chinook-database)
+
+> ⚠️ Observação: Este projeto é de caráter **educacional**, desenvolvido para fins de **aprendizado e prática de técnicas de análise de dados** com **SQL (SQLite)** e **Power BI**.  
+> Não há uso comercial ou dados sensíveis envolvidos.
 ---
 
 ## ⚙️ Estrutura do Banco de Dados
@@ -155,6 +178,10 @@ Aqui usamos as **views criadas** (`vw_sales_summary`, `vw_tracks_sales`, `vw_fac
 SELECT SUM(InvoiceTotal) AS TotalRevenue
 FROM vw_sales_summary;
 ```
+📸 Resultado da consulta:
+
+📝 Interpretação:
+
 
 ❓ Qual é a evolução das vendas por ano e mês?
 ```sql
