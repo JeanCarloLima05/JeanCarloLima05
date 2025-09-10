@@ -179,7 +179,7 @@ SELECT SUM(InvoiceTotal) AS TotalRevenue
 FROM vw_sales_summary;
 ```
 📸 Resultado da consulta:
-
+![Texto alternativo](caminho/para/imagem.png)
 📝 Interpretação:
 
 
