@@ -180,7 +180,7 @@ FROM vw_sales_summary;
 ```
 📸 Resultado da consulta:
 
-![Resultado](Projeto_SQL_Power BI_Loja_Música_Digital/Resultados das Consultas/Resultado_1.png)
+![Resultado](Projeto_SQL_Power BI_Loja_Música_Digital/Resultado_Consultas/Resultado_1.png)
 
 📝 Interpretação:
 
