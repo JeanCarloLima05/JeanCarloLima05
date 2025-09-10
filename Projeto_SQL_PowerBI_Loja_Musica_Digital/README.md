@@ -196,8 +196,6 @@ ORDER BY YearMonth;
 ```
 📸 Resultado da consulta:
 
-
-
 📝 Interpretação:
 
 Utilizando a view de dimensionamento de tempo podemos obter o ano/mês, a juntamente com a view do resumo de vendas podemos fazer o romatoria da receita de vendas e agrupar por ano e mês. 
@@ -205,11 +203,17 @@ Assim obtemos uma tabela ordenada por ano/mês, notando que a receita de venda s
 
 ❓ Quais são os gêneros musicais mais vendidos?
 ```sql
-SELECT Genre, SUM(LineTotal) AS Revenue
+SELECT Genre, SUM(LineTotal) AS ReceitaFaixa
 FROM vw_tracks_sales
 GROUP BY Genre
-ORDER BY Revenue DESC;
+ORDER BY ReceitaFaixa DESC;
 ```
+
+📝 Interpretação:
+
+Temos a soma das receita gerada por essa faixa específica (Quantidades x preço por unidade de faixa), assim agrupando por genero e ordenando dos generos mais vendidos para os menos vendidos. Temos que o gênero de Rock foi o mais vendido com 826,65, seguido do estilo músical Latino com 382,14 e em terceito o gênero Metal com 261,26 de receita gerada.
+O Rock é o estilo músical que mais se destaca nas vendas online de música na loja, obtendo uma receita cerca de 53,77% maior que o segundo estilo mais vendido.
+
 
 ❓ Quem são os clientes que mais gastaram? (Top 10)
 ```sql
