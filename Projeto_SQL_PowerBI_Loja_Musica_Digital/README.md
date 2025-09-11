@@ -223,6 +223,10 @@ GROUP BY CustomerId
 ORDER BY TotalGasto DESC
 LIMIT 10;
 ```
+📝 Interpretação:
+
+Os Clientes que mais gastaram na loja foram: Em primeiro **Helena Holý** com um total gasto de **49,62**, o segundo cliente que mais gastou foi **Richard Cunningham** com um total gasto de **47,62** e em terceiro **Luis Rojas** com um total gasto de **46,62**.
+Podemos observar que os 10 clientes que masi gastaram na loja, gastaram valores dentre **40** e **50** doleres em compras.
 
 ## 👥 Clientes e Funcionários
 
