@@ -250,7 +250,7 @@ ORDER BY TotalSales DESC;
 ```
 
 📝 Interpretação:
-O funcionário que está associado so maior volume de vendas é **Jane Peacock** com um valores associdado de **833,04**, seguido por **Margaret Park** com **775,40** e **Steve Johnson** com **720,16**. Notamos que os vededores mantém um bom desempenho de vendas com valores bem próximo, isso mostra uma integração de vendas bem destribuida entre os funcionários da loja.
+O funcionário que está associado so maior volume de vendas é **Jane Peacock** com um valores associdado de **833,04**, seguido por **Margaret Park** com **775,40** e **Steve Johnson** com **720,16**. Notamos que os vendedores mantém um bom desempenho de vendas com valores bem próximo, isso mostra uma integração de vendas bem destribuida entre os funcionários da loja.
 
 ❓ Quem são os 3 clientes mais rentáveis em cada país?
 ```sql
