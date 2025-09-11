@@ -238,6 +238,9 @@ GROUP BY Country
 ORDER BY TotalCustomers DESC;
 ```
 
+📝 Interpretação:
+O país que concentra mais clientes ativo é os **Estados Unidos** com um total de **13** clientes ativos, seguido do **Canadá** com 8 clientes ativos e **França** e **Brasil** com 5 clientes ativos. Notamos que os clientes ativos do Estado Unidos correspondem a cerca de **22%** de todos os clientes ativos da loja (total de 59 clientes ativos). 
+
 ❓ Qual funcionário (suporte a clientes) está associado ao maior volume de vendas?
 ```sql
 SELECT SupportRep, SUM(InvoiceTotal) AS TotalSales
