@@ -223,6 +223,7 @@ GROUP BY CustomerId
 ORDER BY TotalGasto DESC
 LIMIT 10;
 ```
+
 📝 Interpretação:
 
 Os Clientes que mais gastaram na loja foram: Em primeiro **Helena Holý** com um total gasto de **49,62**, o segundo cliente que mais gastou foi **Richard Cunningham** com um total gasto de **47,62** e em terceiro **Luis Rojas** com um total gasto de **46,62**.
@@ -239,6 +240,7 @@ ORDER BY TotalCustomers DESC;
 ```
 
 📝 Interpretação:
+
 O país que concentra mais clientes ativo é os **Estados Unidos** com um total de **13** clientes ativos, seguido do **Canadá** com 8 clientes ativos e **França** e **Brasil** com 5 clientes ativos. Notamos que os clientes ativos do Estado Unidos correspondem a cerca de **22%** de todos os clientes ativos da loja (total de 59 clientes ativos). 
 
 ❓ Qual funcionário (suporte a clientes) está associado ao maior volume de vendas?
@@ -250,6 +252,7 @@ ORDER BY TotalSales DESC;
 ```
 
 📝 Interpretação:
+
 O funcionário que está associado so maior volume de vendas é **Jane Peacock** com um valores associdado de **833,04**, seguido por **Margaret Park** com **775,40** e **Steve Johnson** com **720,16**. Notamos que os vendedores mantém um bom desempenho de vendas com valores bem próximo, isso mostra uma integração de vendas bem destribuida entre os funcionários da loja.
 
 ❓ Quem são os 3 clientes mais rentáveis em cada país?
@@ -268,7 +271,9 @@ FROM ranked_customers
 WHERE RankPos <= 3
 ORDER BY Country, RankPos;
 ```
+
 📝 Interpretação:
+
 Notamos que para muitos países temos varios clientes com os mesmo valores gastos na loja, assim podemos observar que a maioria dos clientes gastam valores de forma parecida, sendo os destaque de clientes pontuais. Algusn píses com apenas 1 cleinte e outro cujos os clientes gastam valores bem próximos um do outro. Assim podemos interpretar que os cleinte seguem um padrão de valores gastos na loja, sem variaões bruscas.
 
 ## 🎵 Catálogo de Músicas
@@ -281,7 +286,9 @@ JOIN Album al ON ar.ArtistId = al.ArtistId
 GROUP BY ar.Name
 ORDER BY TotalAlbums DESC;
 ```
+
 📝 Interpretação:
+
 Os artistas que tem mais álbusn cadastrados são: **Iron Maiden** com **21** álbuns, seguido de **Led Zeppelin** com **14** álbuns e **Deep Purple** com **11**. Notamos um padrão cujos artista que tem mais álbuns cadastras são do gênero musical de **rock**, o mesmo gênero musical mais vendido na loja. Assim notamos a influência dos álbuns cadastrados com a venda do mesmo na loja.
 
 ❓ Quais são os artistas mais vendidos? (Top 5)
@@ -292,18 +299,24 @@ GROUP BY Artist
 ORDER BY Revenue DESC
 LIMIT 5;
 ```
+
 📝 Interpretação:
+
 Seguindo a linha de análise notamos que os artista mais vendidos seguem o estilo musical do rock com a banda **Iron Maiden** a mais vendida com o valore de **138,60**, seguido de **U2** com **105,92** e **Metallica** com **90,09** de receita. Tirando a banda **Iron Maiden** que tem o maior númeoro de albuns cadastrados, as bandas **U2** e **Metallica** mesmo não sendo uma das bandas com mais albúns cadastrados, ainda sim está entre as top 3 bandas/artistas que mais geram receita na loja.
 
 
 ❓ Quais são os álbuns mais vendidos?
 ```sql
-SELECT Album, SUM(LineTotal) AS Revenue
+SELECT  Album, SUM(LineTotal) AS Revenue, Artist
 FROM vw_tracks_sales
 GROUP BY Album
 ORDER BY Revenue DESC
 LIMIT 5;
 ```
+
+📝 Interpretação:
+
+Os álbusn mais vendidos 
 
 ❓ Qual a faixa mais cara vendida em cada gênero musical?
 ```sql
