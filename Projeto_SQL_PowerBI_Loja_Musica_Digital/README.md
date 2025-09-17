@@ -268,6 +268,8 @@ FROM ranked_customers
 WHERE RankPos <= 3
 ORDER BY Country, RankPos;
 ```
+📝 Interpretação:
+Notamos que para muitos países temos varios clientes com os mesmo valores gastos na loja, assim podemos observar que a maioria dos clientes gastam valores de forma parecida, sendo os destaque de clientes pontuais. Algusn píses com apenas 1 cleinte e outro cujos os clientes gastam valores bem próximos um do outro. Assim podemos interpretar que os cleinte seguem um padrão de valores gastos na loja, sem variaões bruscas.
 
 ## 🎵 Catálogo de Músicas
 
