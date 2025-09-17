@@ -281,6 +281,8 @@ JOIN Album al ON ar.ArtistId = al.ArtistId
 GROUP BY ar.Name
 ORDER BY TotalAlbums DESC;
 ```
+📝 Interpretação:
+Os artistas que tem mais álbusn cadastrados são: **Iron Maiden** com **21** álbuns, seguido de **Led Zeppelin** com **14** álbuns e **Deep Purple** com **11**. Notamos um padrão cujos artista que tem mais álbuns cadastras são do gênero musical de **rock**, o mesmo gênero musical mais vendido na loja. Assim notamos a influência dos álbuns cadastrados com a venda do mesmo na loja.
 
 ❓ Quais são os artistas mais vendidos? (Top 5)
 ```sql
@@ -290,6 +292,9 @@ GROUP BY Artist
 ORDER BY Revenue DESC
 LIMIT 5;
 ```
+📝 Interpretação:
+Seguindo a linha de análise notamos que os artista mais vendidos seguem o estilo musical do rock com a banda **Iron Maiden** a mais vendida com o valore de **138,60**, seguido de **U2** com **105,92** e **Metallica** com **90,09** de receita. Tirando a banda **Iron Maiden** que tem o maior númeoro de albuns cadastrados, as bandas **U2** e **Metallica** mesmo não sendo uma das bandas com mais albúns cadastrados, ainda sim está entre as top 3 bandas/artistas que mais geram receita na loja.
+
 
 ❓ Quais são os álbuns mais vendidos?
 ```sql
