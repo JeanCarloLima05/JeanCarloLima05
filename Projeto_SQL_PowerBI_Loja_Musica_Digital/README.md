@@ -65,8 +65,9 @@ Essas perguntas guiarão a parte SQL e depois serão visualizadas no Power BI.
 
 
 ### 🎵 Catálogo de Músicas
-- Quais são os artistas mais vendidos?
-- Quais são os álbuns mais vendidos?
+- Qual a quantidade de álbuns cadastrados por artista?
+- Quais são os artistas mais vendidos? (Top 5)
+- Qual a distribuição de artístas, álbuns e faixas por gênero musical?
 - Qual o preço médio por faixa em cada gênero?
 
 
@@ -278,7 +279,8 @@ Notamos que para muitos países temos varios clientes com os mesmo valores gasto
 
 ## 🎵 Catálogo de Músicas
 
-❓ Quantidade de álbuns cadastrados por artista.
+❓ Qual a quantidade de álbuns cadastrados por artista?
+
 ```sql
 SELECT ar.Name AS Artist, COUNT(al.AlbumId) AS TotalAlbums
 FROM Artist ar
@@ -292,6 +294,7 @@ ORDER BY TotalAlbums DESC;
 Os artistas que tem mais álbusn cadastrados são: **Iron Maiden** com **21** álbuns, seguido de **Led Zeppelin** com **14** álbuns e **Deep Purple** com **11**. Notamos um padrão cujos artista que tem mais álbuns cadastras são do gênero musical de **rock**, o mesmo gênero musical mais vendido na loja. Assim notamos a influência dos álbuns cadastrados com a venda do mesmo na loja.
 
 ❓ Quais são os artistas mais vendidos? (Top 5)
+
 ```sql
 SELECT Artist, SUM(LineTotal) AS Revenue
 FROM vw_tracks_sales
@@ -305,13 +308,23 @@ LIMIT 5;
 Seguindo a linha de análise notamos que os artista mais vendidos seguem o estilo musical do rock com a banda **Iron Maiden** a mais vendida com o valore de **138,60**, seguido de **U2** com **105,92** e **Metallica** com **90,09** de receita. Tirando a banda **Iron Maiden** que tem o maior númeoro de albuns cadastrados, as bandas **U2** e **Metallica** mesmo não sendo uma das bandas com mais albúns cadastrados, ainda sim está entre as top 3 bandas/artistas que mais geram receita na loja.
 
 
-❓ Quais são os álbuns mais vendidos?
+❓ Qual a distribuição de artístas, álbuns e faixas por gênero musical?
+
 ```sql
-SELECT  Album, SUM(LineTotal) AS Revenue, Artist
-FROM vw_tracks_sales
-GROUP BY Album
-ORDER BY Revenue DESC
-LIMIT 5;
+SELECT 
+    g.Name AS Genero,
+    COUNT(DISTINCT ar.ArtistId) AS TotalArtistas,
+    COUNT(DISTINCT a.AlbumId) AS TotalAlbuns,
+    COUNT(DISTINCT t.TrackId) AS TotalFaixas,
+    ROUND(COUNT(DISTINCT t.TrackId) * 1.0 / COUNT(DISTINCT ar.ArtistId), 1) AS MediaFaixasPorArtista,
+    ROUND(COUNT(DISTINCT a.AlbumId) * 1.0 / COUNT(DISTINCT ar.ArtistId), 1) AS MediaAlbunsPorArtista,
+    ROUND(COUNT(DISTINCT ar.ArtistId) * 100.0 / (SELECT COUNT(DISTINCT ArtistId) FROM Artist), 2) AS PercentualArtistas
+FROM Genre g
+JOIN Track t ON g.GenreId = t.GenreId
+JOIN Album a ON t.AlbumId = a.AlbumId
+JOIN Artist ar ON a.ArtistId = ar.ArtistId
+GROUP BY g.Name
+ORDER BY TotalArtistas DESC;
 ```
 
 📝 Interpretação:
