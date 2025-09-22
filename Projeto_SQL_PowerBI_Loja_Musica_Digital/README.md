@@ -60,9 +60,8 @@ Essas perguntas guiarão a parte SQL e depois serão visualizadas no Power BI.
 
 ### 👥 Clientes e Funcionários
 - Qual país concentra mais clientes ativos?
-- Quem são os 3 clientes mais rentáveis em cada país?
 - Qual funcionário (suporte a clientes) está associado ao maior volume de vendas?
-
+- Quem são os 3 clientes mais rentáveis em cada país?
 
 ### 🎵 Catálogo de Músicas
 - Qual a quantidade de álbuns cadastrados por artista?
@@ -331,7 +330,7 @@ ORDER BY TotalArtistas DESC;
 
 Os álbusn mais vendidos 
 
-❓ Qual a faixa mais cara vendida em cada gênero musical?
+❓ Qual o preço médio por faixa em cada gênero? 
 ```sql
 WITH ranked_tracks AS (
     SELECT 
