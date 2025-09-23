@@ -67,8 +67,6 @@ Essas perguntas guiarão a parte SQL e depois serão visualizadas no Power BI.
 - Qual a quantidade de álbuns cadastrados por artista?
 - Quais são os artistas mais vendidos? (Top 5)
 - Qual a distribuição de artístas, álbuns e faixas por gênero musical?
-- Qual o preço médio por faixa em cada gênero?
-
 
 ### 📊 Indicadores Estratégicos
 - Qual é o ticket médio por cliente?
@@ -328,23 +326,7 @@ ORDER BY TotalArtistas DESC;
 
 📝 Interpretação:
 
-Os álbusn mais vendidos 
-
-❓ Qual o preço médio por faixa em cada gênero? 
-```sql
-WITH ranked_tracks AS (
-    SELECT 
-        Genre,
-        TrackName,
-        UnitPrice,
-        RANK() OVER (PARTITION BY Genre ORDER BY UnitPrice DESC) AS RankPos
-    FROM vw_tracks_sales
-)
-SELECT Genre, TrackName, UnitPrice
-FROM ranked_tracks
-WHERE RankPos = 1
-ORDER BY Genre;
-```
+Notamos que o gênero musical com a maior número de artistas cadastrados na loja é o gênero **Classico** que corresponde a **24%** dos artista cadastrados na loja, seguido do gênero **Rock** com **18,55%** e **Latino** com **10,18%**. Apesar do número elevadfo de artista do gênero Classico cadastrados, o mesmo não apresenta um bom desempenho nas vendas da loja.
 
 ## 📊 Indicadores Estratégicos
 
@@ -357,6 +339,8 @@ FROM (
     GROUP BY CustomerId
 );
 ```
+📝 Interpretação: 
+O ticket médio por cliente, ou seja, o valor médio gato por cliente na loja é de **$39,47**.
 
 ❓ Quais são as tendências de crescimento de vendas? (Receita acumulada)
 ```sql
@@ -374,6 +358,9 @@ SELECT
     SUM(Revenue) OVER (ORDER BY YearMonth) AS CumulativeRevenue
 FROM monthly_sales;
 ```
+📝 Interpretação:
+
+A tendência mostra uma linearidade nas vendas, onde os valores de vendas durante o mês se mantém, com uma pequena ocilação em alguns meses, mas mantendo um padrão de valor relativo ao ticket médio calculado anteriormente.
 
 ❓ Qual é o gênero musical com maior potencial de receita?
 ```sql
@@ -383,3 +370,11 @@ GROUP BY Genre
 ORDER BY Revenue DESC
 LIMIT 1;
 ```
+
+📝 Interpretação:
+
+O gênero de **Rock** ainda se mantém um grande potencial de vendas, sendo o gênero mais vendido na loja, além de ser gênero o com maior número de albuns e faixa cadastrados na loja. E o gênero mais procurado pelos clientes, isso mostra o potêncial de crescimento caso se invista mais no gênero.
+
+
+
+
